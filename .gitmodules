@@ -1,0 +1,9 @@
+[submodule "external/tws-api"]
+	path = external/tws-api
+	url = git@github.com:InteractiveBrokers/tws-api.git
+[submodule "external/external/tws-api"]
+	path = external/external/tws-api
+	url = https://github.com/InteractiveBrokers/tws-api.git
+[submodule "external/ib-ruby"]
+	path = external/ib-ruby
+	url = git@github.com:ib-ruby/ib-ruby.git
