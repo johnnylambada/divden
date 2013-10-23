@@ -61,6 +61,14 @@ function tws
 }
 echo 'tws@start tws' >> $T/.hmm
 
+function balance
+{
+  (
+  java -jar $(gettop)/tools/out/artifacts/balance_jar/balance.jar
+  )
+}
+echo 'balance@show the balance of the accounts' >> $T/.hmm
+
 has-account ()
 {
     if [ -n "$IB_ACCOUNT" ]; then
