@@ -38,7 +38,9 @@ public class Balance implements EWrapper {
         System.out.printf(Locale.US,"reqId=%d account=%s tag=%s value=%s currency=%s\n",
                 reqId,account,tag,value,currency);
     }
-    @Override public void accountSummaryEnd(int reqId) { }
+    @Override public void accountSummaryEnd(int reqId) {
+        ib.eDisconnect();
+    }
     @Override public void bondContractDetails(int reqId, ContractDetails contractDetails) { }
     @Override public void commissionReport(CommissionReport commissionReport) { }
     @Override public void connectionClosed() { }
