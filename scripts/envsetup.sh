@@ -69,6 +69,14 @@ function balance
 }
 echo 'balance@show the balance of the accounts' >> $T/.hmm
 
+function divden
+{
+  (
+  java -jar $(gettop)/tools/out/artifacts/divden_jar/divden.jar $*
+  )
+}
+echo 'divden@divden' >> $T/.hmm
+
 has-account ()
 {
     if [ -n "$IB_ACCOUNT" ]; then
