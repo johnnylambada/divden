@@ -16,12 +16,74 @@ import java.util.Locale;
  * Divden implements the divden approach
  */
 public class Divden implements EWrapper {
-	EClientSocket ib = new EClientSocket(this);
-	
+
+    private static String USAGE =
+        "-s symbol\n"+
+        "-r riskCurrency\n"+
+        "-n numShares\n"+
+        "-c cashWin\n"+
+        "-x transactionCost\n\n";
+
+    private static double CASH_WIN = 10.00;
+    private static int NUM_SHARES = 1;
+    private static double RISK_CURRENCY = 10000.00;
+    private static String SYMBOL="T"; // AT&T
+    private static double TRANSACTION_COST = 1.50;
+
+    private double cashWin = CASH_WIN;
+    private int numShares = NUM_SHARES;
+    private double riskCurrency = RISK_CURRENCY;
+    private String symbol = SYMBOL;
+    private double transactionCost = TRANSACTION_COST;
+
+    private EClientSocket ib = new EClientSocket(this);
+
 	public static void main(String[] args) {
-		new Divden().run();
+        Divden divden = new Divden();
+        for (int i=0; i<args.length; i++){
+            String arg = args[i];
+            if ("-c".equals(arg)){
+                try { divden.cashWin = Double.parseDouble(args[++i]);}
+                catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
+                catch (NumberFormatException e ){err("Invalid argument for "+arg);}
+            } else if ("-n".equals(arg)){
+                try { divden.numShares = Integer.parseInt(args[++i]);}
+                catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
+                catch (NumberFormatException e ){err("Invalid argument for "+arg);}
+            } else if ("-r".equals(arg)){
+                try { divden.riskCurrency = Double.parseDouble(args[++i]);}
+                catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
+                catch (NumberFormatException e ){err("Invalid argument for "+arg);}
+            } else if ("-s".equals(arg)){
+                try { divden.symbol = args[++i];}
+                catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
+            } else if ("-x".equals(arg)){
+                try { divden.transactionCost = Double.parseDouble(args[++i]);}
+                catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
+                catch (NumberFormatException e ){err("Invalid argument for "+arg);}
+            }
+        }
+        divden.report();
+		divden.run();
 	}
 
+    private static void err(String err){
+        usage();
+        System.err.print(err+"\n");
+        System.exit(1);
+    }
+
+    private static void usage(){
+        System.err.print(USAGE);
+    }
+
+    private void report(){
+        System.out.printf(Locale.US,"Symbol:           %s\n",symbol);
+        System.out.printf(Locale.US,"Casgh Win:        %f\n",cashWin);
+        System.out.printf(Locale.US,"Shares:           %d\n",numShares);
+        System.out.printf(Locale.US,"Risk Currency:    %f\n",riskCurrency);
+        System.out.printf(Locale.US,"Transaction Cost: %f\n",transactionCost);
+    }
 	private void run() {
 		ib.eConnect("localhost", 7496, 0);
 
