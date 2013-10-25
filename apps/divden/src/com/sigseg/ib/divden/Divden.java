@@ -11,6 +11,7 @@ import com.ib.client.OrderState;
 import com.ib.client.UnderComp;
 
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Divden implements the divden approach
@@ -30,6 +31,9 @@ public class Divden implements EWrapper {
     private static String SYMBOL="T"; // AT&T
     private static double TRANSACTION_COST = 1.50;
 
+    private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
+
+    private String account = null;
     private double cashWin = CASH_WIN;
     private int numShares = NUM_SHARES;
     private double riskCurrency = RISK_CURRENCY;
@@ -63,21 +67,24 @@ public class Divden implements EWrapper {
                 catch (NumberFormatException e ){err("Invalid argument for "+arg);}
             }
         }
+
+        Map<String, String> env = System.getenv();
+        if (env.containsKey(ENV_IB_ACCOUNT)){
+            divden.account = env.get(ENV_IB_ACCOUNT);
+        } else {
+            err(ENV_IB_ACCOUNT + " must be set");
+        }
         divden.report();
 		divden.run();
 	}
 
     private static void err(String err){
-        usage();
-        System.err.print(err+"\n");
+        System.err.print(USAGE+err + "\n");
         System.exit(1);
     }
 
-    private static void usage(){
-        System.err.print(USAGE);
-    }
-
     private void report(){
+        System.out.printf(Locale.US,"Account:          %s\n",account);
         System.out.printf(Locale.US,"Symbol:           %s\n",symbol);
         System.out.printf(Locale.US,"Casgh Win:        %f\n",cashWin);
         System.out.printf(Locale.US,"Shares:           %d\n",numShares);
