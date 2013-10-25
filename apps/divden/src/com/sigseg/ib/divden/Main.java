@@ -11,7 +11,8 @@ import java.util.Map;
 public class Main {
 
 	public static void main(String[] args) {
-        Divden divden = new Divden();
+        Logger log = new Logger();
+        Divden divden = new Divden(log);
         divden.processArgs(args);
         divden.processEnv(System.getenv());
         divden.start();
