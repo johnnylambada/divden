@@ -42,45 +42,65 @@ public class Divden implements EWrapper {
 
     private EClientSocket ib = new EClientSocket(this);
 
-	public static void main(String[] args) {
-        Divden divden = new Divden();
+    private static void err(String err){
+        System.err.print(USAGE+err + "\n");
+        System.exit(1);
+    }
+
+    public void processArgs(String[] args) {
         for (int i=0; i<args.length; i++){
             String arg = args[i];
             if ("-c".equals(arg)){
-                try { divden.cashWin = Double.parseDouble(args[++i]);}
+                try { cashWin = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
                 catch (NumberFormatException e ){err("Invalid argument for "+arg);}
             } else if ("-n".equals(arg)){
-                try { divden.numShares = Integer.parseInt(args[++i]);}
+                try { numShares = Integer.parseInt(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
                 catch (NumberFormatException e ){err("Invalid argument for "+arg);}
             } else if ("-r".equals(arg)){
-                try { divden.riskCurrency = Double.parseDouble(args[++i]);}
+                try { riskCurrency = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
                 catch (NumberFormatException e ){err("Invalid argument for "+arg);}
             } else if ("-s".equals(arg)){
-                try { divden.symbol = args[++i];}
+                try { symbol = args[++i];}
                 catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
             } else if ("-x".equals(arg)){
-                try { divden.transactionCost = Double.parseDouble(args[++i]);}
+                try { transactionCost = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){err(arg+" requires a parameter");}
                 catch (NumberFormatException e ){err("Invalid argument for "+arg);}
             }
         }
+    }
 
-        Map<String, String> env = System.getenv();
+    public void processEnv(Map<String,String> env) {
         if (env.containsKey(ENV_IB_ACCOUNT)){
-            divden.account = env.get(ENV_IB_ACCOUNT);
+            account = env.get(ENV_IB_ACCOUNT);
         } else {
             err(ENV_IB_ACCOUNT + " must be set");
         }
-        divden.report();
-		divden.run();
-	}
+    }
 
-    private static void err(String err){
-        System.err.print(USAGE+err + "\n");
-        System.exit(1);
+    public void start() {
+        report();
+
+        ib.eConnect("localhost", 7496, 0);
+        if (ib.isConnected()){
+            ib.reqAccountSummary(1, "All", "BuyingPower");
+        }
+    }
+
+    private enum StateMachine {
+        CONNECT(new Runnable(){@Override public void run() {
+//            ib.eConnect("localhost", 7496, 0);
+        }}),
+        WAIT_IN_PRICE(new Runnable(){@Override public void run() {}}),
+        ;
+        StateMachine(Runnable run){this.run=run;}
+        Runnable run;
+        static StateMachine currentState = CONNECT;
+
+        static void step(){ currentState.run.run();}
     }
 
     private void report(){
@@ -90,16 +110,6 @@ public class Divden implements EWrapper {
         System.out.printf(Locale.US,"Shares:           %d\n",numShares);
         System.out.printf(Locale.US,"Risk Currency:    %f\n",riskCurrency);
         System.out.printf(Locale.US,"Transaction Cost: %f\n",transactionCost);
-    }
-	private void run() {
-		ib.eConnect("localhost", 7496, 0);
-
-        ib.reqAccountSummary(1, "All", "BuyingPower");
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-//        }
     }
 
     @Override public void accountDownloadEnd(String accountName) { }
