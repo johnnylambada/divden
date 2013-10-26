@@ -13,10 +13,13 @@ public class Divden implements EWrapper {
     private final static String SYMBOL="T"; // AT&T
     private final static double TRANSACTION_COST = 1.50;
 
+    public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
+
     private String account = null;
     private double cashWin = CASH_WIN;
     private int numShares = NUM_SHARES;
     private double riskCurrency = RISK_CURRENCY;
+    private boolean isShort = false;
     private String symbol = SYMBOL;
     private double transactionCost = TRANSACTION_COST;
 
@@ -28,52 +31,10 @@ public class Divden implements EWrapper {
         this.log = logger;
     }
 
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public double getCashWin() {
-        return cashWin;
-    }
-
-    public void setCashWin(double cashWin) {
-        this.cashWin = cashWin;
-    }
-
-    public int getNumShares() {
-        return numShares;
-    }
-
-    public void setNumShares(int numShares) {
-        this.numShares = numShares;
-    }
-
-    public double getRiskCurrency() {
-        return riskCurrency;
-    }
-
-    public void setRiskCurrency(double riskCurrency) {
-        this.riskCurrency = riskCurrency;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public double getTransactionCost() {
-        return transactionCost;
-    }
-
-    public void setTransactionCost(double transactionCost) {
-        this.transactionCost = transactionCost;
+    public void validate() throws DivdenException {
+        if (account==null){
+            throw new DivdenException("Account cannot be null");
+        }
     }
 
     public void start() {
@@ -86,17 +47,18 @@ public class Divden implements EWrapper {
     }
 
     private void report(){
-        log.out("Account:          %s\n", account);
-        log.out("Symbol:           %s\n", symbol);
-        log.out("Casgh Win:        %f\n", cashWin);
-        log.out("Shares:           %d\n", numShares);
-        log.out("Risk Currency:    %f\n", riskCurrency);
-        log.out("Transaction Cost: %f\n", transactionCost);
+        log.out("Account:          %s", account);
+        log.out("Direction:        %s", isShort?"Short":"Long");
+        log.out("Symbol:           %s", symbol);
+        log.out("Casgh Win:        %f", cashWin);
+        log.out("Shares:           %d", numShares);
+        log.out("Risk Currency:    %f", riskCurrency);
+        log.out("Transaction Cost: %f", transactionCost);
     }
 
     @Override public void accountDownloadEnd(String accountName) { }
     @Override public void accountSummary(int reqId, String account, String tag, String value, String currency) {
-        log.out("reqId=%d account=%s tag=%s value=%s currency=%s\n",
+        log.out("reqId=%d account=%s tag=%s value=%s currency=%s",
                 reqId, account, tag, value, currency);
     }
     @Override public void accountSummaryEnd(int reqId) {
@@ -142,4 +104,28 @@ public class Divden implements EWrapper {
     @Override public void updateMktDepthL2(int tickerId, int position, String marketMaker, int operation, int side, double price, int size) {}
     @Override public void updateNewsBulletin(int msgId, int msgType, String message, String origExchange) { }
     @Override public void updatePortfolio(Contract contract, int position, double marketPrice, double marketValue, double averageCost, double unrealizedPNL, double realizedPNL, String accountName) { }
+
+    // Getters and Setters
+    public String getAccount() { return account; }
+    public void setAccount(String account) { this.account = account; }
+
+    public double getCashWin() { return cashWin; }
+    public void setCashWin(double cashWin) { this.cashWin = cashWin; }
+
+    public int getNumShares() { return numShares; }
+    public void setNumShares(int numShares) { this.numShares = numShares; }
+
+    public double getRiskCurrency() { return riskCurrency; }
+    public void setRiskCurrency(double riskCurrency) { this.riskCurrency = riskCurrency; }
+
+    public boolean getIsShort() { return isShort; }
+    public void setIsShort(boolean isShort) { this.isShort = isShort; }
+
+    public String getSymbol() { return symbol; }
+    public void setSymbol(String symbol) { this.symbol = symbol; }
+
+    public double getTransactionCost() { return transactionCost; }
+    public void setTransactionCost(double transactionCost) { this.transactionCost = transactionCost; }
+
+
 }

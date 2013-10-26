@@ -12,7 +12,12 @@ public class Main {
 
 	public static void main(String[] args) {
         Logger log = new Logger();
-        Divden divden = DivdenFactory.make(args,System.getenv(),log);
-        divden.start();
+        Divden divden;
+        try {
+            divden = DivdenFactory.make(args,System.getenv(),log);
+            divden.start();
+        } catch (Exception e){
+            log.wtf(e.getMessage());
+        }
     }
 }
