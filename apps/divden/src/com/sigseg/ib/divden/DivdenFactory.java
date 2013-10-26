@@ -1,7 +1,5 @@
 package com.sigseg.ib.divden;
 
-import com.ib.client.*;
-
 import java.util.Map;
 
 /**
@@ -37,22 +35,22 @@ public class DivdenFactory {
         for (int i=0; i<args.length; i++){
             String arg = args[i];
             if ("-c".equals(arg)){
-                try { divden.cashWin = Double.parseDouble(args[++i]);}
+                try { divden.setCashWin(Double.parseDouble(args[++i]));}
                 catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg + " requires a parameter");}
                 catch (NumberFormatException e ){log.wtf("Invalid argument for " + arg);}
             } else if ("-n".equals(arg)){
-                try { divden.numShares = Integer.parseInt(args[++i]);}
+                try { divden.setNumShares(Integer.parseInt(args[++i]));}
                 catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg + " requires a parameter");}
                 catch (NumberFormatException e ){log.wtf("Invalid argument for " + arg);}
             } else if ("-r".equals(arg)){
-                try { divden.riskCurrency = Double.parseDouble(args[++i]);}
+                try { divden.setRiskCurrency(Double.parseDouble(args[++i]));}
                 catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg + " requires a parameter");}
                 catch (NumberFormatException e ){log.wtf("Invalid argument for " + arg);}
             } else if ("-s".equals(arg)){
-                try { divden.symbol = args[++i];}
+                try { divden.setSymbol(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg + " requires a parameter");}
             } else if ("-x".equals(arg)){
-                try { divden.transactionCost = Double.parseDouble(args[++i]);}
+                try { divden.setTransactionCost(Double.parseDouble(args[++i]));}
                 catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg + " requires a parameter");}
                 catch (NumberFormatException e ){log.wtf("Invalid argument for " + arg);}
             }
@@ -61,7 +59,7 @@ public class DivdenFactory {
 
     public void processEnv(Map<String,String> env) {
         if (env.containsKey(ENV_IB_ACCOUNT)){
-            divden.account = env.get(ENV_IB_ACCOUNT);
+            divden.setAccount(env.get(ENV_IB_ACCOUNT));
         } else {
             log.wtf(ENV_IB_ACCOUNT + " must be set");
         }

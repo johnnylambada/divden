@@ -7,18 +7,18 @@ import com.ib.client.*;
  */
 public class Divden implements EWrapper {
 
-    public static double CASH_WIN = 10.00;
-    public static int NUM_SHARES = 1;
-    public static double RISK_CURRENCY = 10000.00;
-    public static String SYMBOL="T"; // AT&T
-    public static double TRANSACTION_COST = 1.50;
+    private final static double CASH_WIN = 10.00;
+    private final static int NUM_SHARES = 1;
+    private final static double RISK_CURRENCY = 10000.00;
+    private final static String SYMBOL="T"; // AT&T
+    private final static double TRANSACTION_COST = 1.50;
 
-    public String account = null;
-    public double cashWin = CASH_WIN;
-    public int numShares = NUM_SHARES;
-    public double riskCurrency = RISK_CURRENCY;
-    public String symbol = SYMBOL;
-    public double transactionCost = TRANSACTION_COST;
+    private String account = null;
+    private double cashWin = CASH_WIN;
+    private int numShares = NUM_SHARES;
+    private double riskCurrency = RISK_CURRENCY;
+    private String symbol = SYMBOL;
+    private double transactionCost = TRANSACTION_COST;
 
     private EClientSocket ib = new EClientSocket(this);
 
@@ -28,6 +28,54 @@ public class Divden implements EWrapper {
         this.log = logger;
     }
 
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public double getCashWin() {
+        return cashWin;
+    }
+
+    public void setCashWin(double cashWin) {
+        this.cashWin = cashWin;
+    }
+
+    public int getNumShares() {
+        return numShares;
+    }
+
+    public void setNumShares(int numShares) {
+        this.numShares = numShares;
+    }
+
+    public double getRiskCurrency() {
+        return riskCurrency;
+    }
+
+    public void setRiskCurrency(double riskCurrency) {
+        this.riskCurrency = riskCurrency;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public double getTransactionCost() {
+        return transactionCost;
+    }
+
+    public void setTransactionCost(double transactionCost) {
+        this.transactionCost = transactionCost;
+    }
+
     public void start() {
         report();
 
@@ -35,19 +83,6 @@ public class Divden implements EWrapper {
         if (ib.isConnected()){
             ib.reqAccountSummary(1, "All", "BuyingPower");
         }
-    }
-
-    private enum StateMachine {
-        CONNECT(new Runnable(){@Override public void run() {
-//            ib.eConnect("localhost", 7496, 0);
-        }}),
-        WAIT_IN_PRICE(new Runnable(){@Override public void run() {}}),
-        ;
-        StateMachine(Runnable run){this.run=run;}
-        Runnable run;
-        static StateMachine currentState = CONNECT;
-
-        static void step(){ currentState.run.run();}
     }
 
     private void report(){
