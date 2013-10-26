@@ -12,9 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
         Logger log = new Logger();
-        Divden divden = new Divden(log);
-        divden.processArgs(args);
-        divden.processEnv(System.getenv());
+        Divden divden = DivdenFactory.make(args,System.getenv(),log);
         divden.start();
     }
 }

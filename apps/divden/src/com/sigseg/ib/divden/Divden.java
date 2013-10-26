@@ -1,16 +1,6 @@
 package com.sigseg.ib.divden;
 
-import com.ib.client.CommissionReport;
-import com.ib.client.Contract;
-import com.ib.client.ContractDetails;
-import com.ib.client.EClientSocket;
-import com.ib.client.EWrapper;
-import com.ib.client.Execution;
-import com.ib.client.Order;
-import com.ib.client.OrderState;
-import com.ib.client.UnderComp;
-
-import java.util.Map;
+import com.ib.client.*;
 
 /**
  * Divden implements the divden approach
@@ -23,12 +13,12 @@ public class Divden implements EWrapper {
     public static String SYMBOL="T"; // AT&T
     public static double TRANSACTION_COST = 1.50;
 
-    private String account = null;
-    private double cashWin = CASH_WIN;
-    private int numShares = NUM_SHARES;
-    private double riskCurrency = RISK_CURRENCY;
-    private String symbol = SYMBOL;
-    private double transactionCost = TRANSACTION_COST;
+    public String account = null;
+    public double cashWin = CASH_WIN;
+    public int numShares = NUM_SHARES;
+    public double riskCurrency = RISK_CURRENCY;
+    public String symbol = SYMBOL;
+    public double transactionCost = TRANSACTION_COST;
 
     private EClientSocket ib = new EClientSocket(this);
 
@@ -36,40 +26,6 @@ public class Divden implements EWrapper {
 
     public Divden(Logger logger){
         this.log = logger;
-    }
-
-    public void processArgs(String[] args) {
-        for (int i=0; i<args.length; i++){
-            String arg = args[i];
-            if ("-c".equals(arg)){
-                try { cashWin = Double.parseDouble(args[++i]);}
-                catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg+" requires a parameter");}
-                catch (NumberFormatException e ){log.wtf("Invalid argument for "+arg);}
-            } else if ("-n".equals(arg)){
-                try { numShares = Integer.parseInt(args[++i]);}
-                catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg+" requires a parameter");}
-                catch (NumberFormatException e ){log.wtf("Invalid argument for "+arg);}
-            } else if ("-r".equals(arg)){
-                try { riskCurrency = Double.parseDouble(args[++i]);}
-                catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg+" requires a parameter");}
-                catch (NumberFormatException e ){log.wtf("Invalid argument for "+arg);}
-            } else if ("-s".equals(arg)){
-                try { symbol = args[++i];}
-                catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg+" requires a parameter");}
-            } else if ("-x".equals(arg)){
-                try { transactionCost = Double.parseDouble(args[++i]);}
-                catch (ArrayIndexOutOfBoundsException e ){log.wtf(arg+" requires a parameter");}
-                catch (NumberFormatException e ){log.wtf("Invalid argument for "+arg);}
-            }
-        }
-    }
-
-    public void processEnv(Map<String,String> env) {
-        if (env.containsKey(ENV_IB_ACCOUNT)){
-            account = env.get(ENV_IB_ACCOUNT);
-        } else {
-            log.wtf(ENV_IB_ACCOUNT + " must be set");
-        }
     }
 
     public void start() {
@@ -95,18 +51,18 @@ public class Divden implements EWrapper {
     }
 
     private void report(){
-        log.out("Account:          %s\n",account);
-        log.out("Symbol:           %s\n",symbol);
-        log.out("Casgh Win:        %f\n",cashWin);
-        log.out("Shares:           %d\n",numShares);
-        log.out("Risk Currency:    %f\n",riskCurrency);
-        log.out("Transaction Cost: %f\n",transactionCost);
+        log.out("Account:          %s\n", account);
+        log.out("Symbol:           %s\n", symbol);
+        log.out("Casgh Win:        %f\n", cashWin);
+        log.out("Shares:           %d\n", numShares);
+        log.out("Risk Currency:    %f\n", riskCurrency);
+        log.out("Transaction Cost: %f\n", transactionCost);
     }
 
     @Override public void accountDownloadEnd(String accountName) { }
     @Override public void accountSummary(int reqId, String account, String tag, String value, String currency) {
         log.out("reqId=%d account=%s tag=%s value=%s currency=%s\n",
-                reqId,account,tag,value,currency);
+                reqId, account, tag, value, currency);
     }
     @Override public void accountSummaryEnd(int reqId) {
         ib.eDisconnect();
