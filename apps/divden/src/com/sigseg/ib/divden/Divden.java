@@ -17,20 +17,11 @@ import java.util.Map;
  */
 public class Divden implements EWrapper {
 
-    private static String USAGE =
-        "-s symbol\n"+
-        "-r riskCurrency\n"+
-        "-n numShares\n"+
-        "-c cashWin\n"+
-        "-x transactionCost\n\n";
-
-    private static double CASH_WIN = 10.00;
-    private static int NUM_SHARES = 1;
-    private static double RISK_CURRENCY = 10000.00;
-    private static String SYMBOL="T"; // AT&T
-    private static double TRANSACTION_COST = 1.50;
-
-    private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
+    public static double CASH_WIN = 10.00;
+    public static int NUM_SHARES = 1;
+    public static double RISK_CURRENCY = 10000.00;
+    public static String SYMBOL="T"; // AT&T
+    public static double TRANSACTION_COST = 1.50;
 
     private String account = null;
     private double cashWin = CASH_WIN;
