@@ -12,6 +12,7 @@ public class Divden implements EWrapper {
     private final static double RISK_CURRENCY = 10000.00;
     private final static String SYMBOL="T"; // AT&T
     private final static double TRANSACTION_COST = 1.50;
+    private final static int TWS_PORT = 7496;
 
     public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
 
@@ -22,6 +23,7 @@ public class Divden implements EWrapper {
     private boolean isShort = false;
     private String symbol = SYMBOL;
     private double transactionCost = TRANSACTION_COST;
+    private int twsPort = TWS_PORT;
 
     private EClientSocket ib = new EClientSocket(this);
 
@@ -40,7 +42,7 @@ public class Divden implements EWrapper {
     public void start() {
         report();
 
-        ib.eConnect("localhost", 7496, 0);
+        ib.eConnect("localhost", twsPort, 0);
         if (ib.isConnected()){
             ib.reqAccountSummary(1, "All", "BuyingPower");
         }
@@ -127,5 +129,7 @@ public class Divden implements EWrapper {
     public double getTransactionCost() { return transactionCost; }
     public void setTransactionCost(double transactionCost) { this.transactionCost = transactionCost; }
 
+    public int getTwsPort() { return twsPort; }
+    public void setTwsPort(int twsPort) { this.twsPort = twsPort; }
 
 }

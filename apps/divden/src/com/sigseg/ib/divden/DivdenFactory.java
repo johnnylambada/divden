@@ -9,6 +9,7 @@ public class DivdenFactory {
 
     private static String USAGE =
         "-a account\n"+
+        "-p twsPort\n"+
         "--short\n"+
         "--long (default)\n"+
         "-s symbol\n"+
@@ -57,6 +58,10 @@ public class DivdenFactory {
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-n".equals(arg)){
                 try { divden.setNumShares(Integer.parseInt(args[++i]));}
+                catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
+                catch (NumberFormatException e ){badParameter(arg);}
+            } else if ("-p".equals(arg)){
+                try { divden.setTwsPort(Integer.parseInt(args[++i]));}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-r".equals(arg)){
