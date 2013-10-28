@@ -30,14 +30,11 @@ public class Divden implements EWrapper,Constants {
     private EClientSocket ibServer = new EClientSocket(this);
     private final Logger log;
 
-    static int tradeId = 0;
-    private class Trade {
-        int id;
-        Contract contract;
-        public Trade(){
-            this.id = ++tradeId;
-        }
+    private enum State {
+        INIT,
+
     }
+    State state = State.INIT;
 
     public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
 
@@ -48,39 +45,6 @@ public class Divden implements EWrapper,Constants {
     public void validate() throws DivdenException {
         if (account==null){
             throw new DivdenException("Account cannot be null");
-        }
-    }
-
-    public void start() {
-        report();
-
-        ibServer.eConnect("localhost", twsPort, 0);
-        if (ibServer.isConnected()){
-            countAndDisconnect(true);
-            ibServer.reqAccountSummary(1, "All", "BuyingPower");
-
-            Trade trade = new Trade();
-            trade.contract = new Contract(
-                0,                      // int p_conId
-                symbol,                 // String p_symbol
-                "STK",                  // String p_secType
-                "",                     // String p_expiry
-                0.0,                    // double p_strike
-                "",                     // String p_right
-                "",                     // String p_multiplier
-                "SMART",                // String p_exchange
-                "USD",                  // String p_currency
-                "",                     // String p_localSymbol
-                "",                     // String p_tradingClass
-                new Vector<ComboLeg>(), // Vector<ComboLeg> p_comboLegs
-                "",                     // String p_primaryExch
-                false,                  // boolean p_includeExpired
-                "",                     // String p_secIdType
-                ""                      // String p_secId
-            );
-
-            countAndDisconnect(true);
-            ibServer.reqMktData(trade.id, trade.contract, JavaClient.GENERIC_TICKS, false);
         }
     }
 
@@ -108,6 +72,31 @@ public class Divden implements EWrapper,Constants {
         log.out("Transaction Cost: %f", transactionCost);
     }
 
+    public void start() {
+        report();
+
+        ibServer.eConnect("localhost", twsPort, 0);
+        if (ibServer.isConnected()){
+            countAndDisconnect(true);
+            ibServer.reqAccountSummary(1, "All", "BuyingPower");
+
+            Ticker ticker = new Ticker();
+            String[] symbolParts = symbol.split(":");
+
+            Contract c = ticker.contract = new Contract();
+            c.m_symbol = symbolParts[0].toUpperCase();
+            if (symbolParts.length>1) c.m_expiry = symbolParts[1];
+
+            Symbol s = null;
+            try { s = Symbol.valueOf(c.m_symbol); } catch (IllegalArgumentException e){}
+            c.m_secType = s!=null? s.securityType.name() : SecurityType.STK.name();
+            c.m_exchange = s!=null? s.exchange.name() : Exchange.SMART.name();
+            c.m_currency = s!=null? s.currency.name() : Currency.USD.name();
+
+            countAndDisconnect(true);
+            ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);
+        }
+    }
     @Override public void accountDownloadEnd(String accountName) { }
     @Override public void accountSummary(int reqId, String account, String tag, String value, String currency) {
         log.out("reqId=%d account=%s tag=%s value=%s currency=%s",
@@ -153,8 +142,8 @@ public class Divden implements EWrapper,Constants {
     @Override public void tickGeneric(int tickerId, int tickType, double value) { }
     @Override public void tickOptionComputation(int tickerId, int field, double impliedVol, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice) { }
     @Override public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
-        log.out("tickerId=%d field=%d price=%f canAutoExecute=%b",
-                tickerId,field,price,canAutoExecute);
+        log.out("tickerId=%d field=%s price=%f canAutoExecute=%b",
+                tickerId,TickType.getField(field),price,canAutoExecute);
     }
     @Override public void tickSize(int tickerId, int field, int size) { }
     @Override public void tickSnapshotEnd(int reqId) {
