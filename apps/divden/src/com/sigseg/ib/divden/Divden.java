@@ -81,17 +81,23 @@ public class Divden implements EWrapper,Constants {
             ibServer.reqAccountSummary(1, "All", "BuyingPower");
 
             Ticker ticker = new Ticker();
-            String[] symbolParts = symbol.split(":");
-
             Contract c = ticker.contract = new Contract();
-            c.m_symbol = symbolParts[0].toUpperCase();
-            if (symbolParts.length>1) c.m_expiry = symbolParts[1];
 
-            Symbol s = null;
-            try { s = Symbol.valueOf(c.m_symbol); } catch (IllegalArgumentException e){}
-            c.m_secType = s!=null? s.securityType.name() : SecurityType.STK.name();
-            c.m_exchange = s!=null? s.exchange.name() : Exchange.SMART.name();
-            c.m_currency = s!=null? s.currency.name() : Currency.USD.name();
+            String[] symbolParts = symbol.split(":");
+            c.m_symbol = symbolParts[0].toUpperCase();
+            if (symbolParts.length>1)
+                c.m_expiry = symbolParts[1];
+
+            try {
+                Symbol s = Symbol.valueOf(c.m_symbol);
+                c.m_secType = s.securityType.name();
+                c.m_exchange = s.exchange.name();
+                c.m_currency = s.currency.name();
+            } catch (IllegalArgumentException e){
+                c.m_secType = SecurityType.STK.name();
+                c.m_exchange = Exchange.SMART.name();
+                c.m_currency = Currency.USD.name();
+            }
 
             countAndDisconnect(true);
             ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);

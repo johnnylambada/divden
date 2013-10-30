@@ -13,19 +13,23 @@ public interface Constants {
     public enum SecurityType{
         STK,
         FUT,
+        CASH,
         ;
     }
     public enum Exchange{
         SMART,
         ECBOT,
+        IDEALPRO,
         ;
     }
     public enum Currency{
         USD,
+        EUR,
         ;
     }
     public enum Symbol{
         YM(SecurityType.FUT,Exchange.ECBOT,Currency.USD),
+        EUR(SecurityType.CASH,Exchange.IDEALPRO,Currency.USD),
         ;
         SecurityType securityType;
         Exchange exchange;
