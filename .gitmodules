@@ -7,3 +7,6 @@
 [submodule "external/ib-ruby"]
 	path = external/ib-ruby
 	url = git@github.com:ib-ruby/ib-ruby.git
+[submodule "external/EasyFlow"]
+	path = external/EasyFlow
+	url = git@github.com:johnnylambada/EasyFlow.git
