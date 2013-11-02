@@ -1,13 +1,15 @@
 package com.sigseg.ib.divden;
 
+import au.com.ds.ef.*;
+import au.com.ds.ef.call.StateHandler;
 import com.ib.client.*;
 
-import java.util.Vector;
+import java.util.concurrent.Executor;
 
 /**
  * Divden implements the divden approach
  */
-public class Divden implements EWrapper,Constants {
+public class Divden extends StatefulContext implements EWrapper,Constants {
 
     /* Constants */
     private final static double CASH_WIN = 10.00;
@@ -30,11 +32,158 @@ public class Divden implements EWrapper,Constants {
     private EClientSocket ibServer = new EClientSocket(this);
     private final Logger log;
 
-    private enum State {
-        INIT,
+    // defining states
+    private final State<Divden> SHOWING_REPORT = FlowBuilder.state();
+    private final State<Divden> CONNECTING = FlowBuilder.state();
+    private final State<Divden> REQUESTING_MARKET_DATA = FlowBuilder.state();
+    private final State<Divden> CALCULATING_POSITION = FlowBuilder.state();
+    private final State<Divden> WAITING_FOR_POSITION_ENTRY = FlowBuilder.state();
+    private final State<Divden> ENTERING_POSITION = FlowBuilder.state();
+    private final State<Divden> WAITING_FOR_POSITION_EXIT = FlowBuilder.state();
+    private final State<Divden> EXITING_POSITION = FlowBuilder.state();
+    private final State<Divden> REPORTING_PROFITS = FlowBuilder.state();
+    private final State<Divden> COMPLETE = FlowBuilder.state();
 
+    // defining events
+    private final Event<Divden> onReportShown = FlowBuilder.event();
+    private final Event<Divden> onConnected = FlowBuilder.event();
+    private final Event<Divden> onMarketDataRequested = FlowBuilder.event();
+    private final Event<Divden> onPositionCalculated = FlowBuilder.event();
+    private final Event<Divden> onEntryFound = FlowBuilder.event();
+    private final Event<Divden> onPositionEntered = FlowBuilder.event();
+    private final Event<Divden> onExitFound = FlowBuilder.event();
+    private final Event<Divden> onPostionExited = FlowBuilder.event();
+    private final Event<Divden> onProfitsReported = FlowBuilder.event();
+
+    private EasyFlow<Divden> flow;
+
+    private void initFlow() {
+        if (flow != null) {
+            return;
+        }
+        // build our FSM
+        flow = FlowBuilder.from(SHOWING_REPORT).transit(
+            onReportShown.to(CONNECTING).transit(
+                onConnected.to(REQUESTING_MARKET_DATA).transit(
+                    onMarketDataRequested.to(CALCULATING_POSITION).transit(
+                        onPositionCalculated.to(WAITING_FOR_POSITION_ENTRY).transit(
+                            onEntryFound.to(ENTERING_POSITION).transit(
+                                onPositionEntered.to(WAITING_FOR_POSITION_EXIT).transit(
+                                    onExitFound.to(EXITING_POSITION).transit(
+                                        onPostionExited.to(REPORTING_PROFITS).transit(
+                                            onProfitsReported.finish(COMPLETE)
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        .executor(new Exec());
     }
-    State state = State.INIT;
+
+    private class Exec implements Executor {
+        @Override
+        public void execute(Runnable runnable) {
+            runnable.run();
+        }
+    }
+
+    private void bindFlow() {
+        SHOWING_REPORT.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+            log.out("Account:          %s", account);
+            log.out("Direction:        %s", isShort ? "Short" : "Long");
+            log.out("Symbol:           %s", symbol);
+            log.out("Casgh Win:        %f", cashWin);
+            log.out("Shares:           %d", numShares);
+            log.out("Risk Currency:    %f", riskCurrency);
+            log.out("Transaction Cost: %f", transactionCost);
+            onReportShown.trigger(context);
+            }
+        });
+        CONNECTING.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+            ibServer.eConnect("localhost", twsPort, 0);
+            if (ibServer.isConnected()){
+                ibServer.reqAccountSummary(1, "All", "BuyingPower");
+                onConnected.trigger(context);
+            }
+            }
+        });
+        REQUESTING_MARKET_DATA.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                Ticker ticker = new Ticker();
+                Contract c = ticker.contract = new Contract();
+
+                String[] symbolParts = symbol.split(":");
+                c.m_symbol = symbolParts[0].toUpperCase();
+                if (symbolParts.length>1)
+                    c.m_expiry = symbolParts[1];
+
+                try {
+                    Symbol s = Symbol.valueOf(c.m_symbol);
+                    c.m_secType = s.securityType.name();
+                    c.m_exchange = s.exchange.name();
+                    c.m_currency = s.currency.name();
+                } catch (IllegalArgumentException e){
+                    c.m_secType = SecurityType.STK.name();
+                    c.m_exchange = Exchange.SMART.name();
+                    c.m_currency = Currency.USD.name();
+                }
+
+                ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);
+                onMarketDataRequested.trigger(context);
+            }
+        });
+        CALCULATING_POSITION.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onPositionCalculated.trigger(context);
+            }
+        });
+        WAITING_FOR_POSITION_ENTRY.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onEntryFound.trigger(context);
+            }
+        });
+        ENTERING_POSITION.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onPositionEntered.trigger(context);
+            }
+        });
+        WAITING_FOR_POSITION_EXIT.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onExitFound.trigger(context);
+            }
+        });
+        EXITING_POSITION.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onPostionExited.trigger(context);
+            }
+        });
+        REPORTING_PROFITS.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onProfitsReported.trigger(context);
+            }
+        });
+        COMPLETE.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                log.out("That's all folks!");
+            }
+        });
+    }
 
     public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
 
@@ -48,69 +197,19 @@ public class Divden implements EWrapper,Constants {
         }
     }
 
-    int count=0;
-    private void countAndDisconnect(boolean isIncrement){
-        synchronized (this){
-            if (isIncrement)
-                count++ ;
-            else {
-                count--;
-                if (count==0){
-                    ibServer.eDisconnect();
-                }
-            }
-        }
-    }
-
-    private void report(){
-        log.out("Account:          %s", account);
-        log.out("Direction:        %s", isShort?"Short":"Long");
-        log.out("Symbol:           %s", symbol);
-        log.out("Casgh Win:        %f", cashWin);
-        log.out("Shares:           %d", numShares);
-        log.out("Risk Currency:    %f", riskCurrency);
-        log.out("Transaction Cost: %f", transactionCost);
-    }
-
     public void start() {
-        report();
+        initFlow();
+        bindFlow();
 
-        ibServer.eConnect("localhost", twsPort, 0);
-        if (ibServer.isConnected()){
-            countAndDisconnect(true);
-            ibServer.reqAccountSummary(1, "All", "BuyingPower");
-
-            Ticker ticker = new Ticker();
-            Contract c = ticker.contract = new Contract();
-
-            String[] symbolParts = symbol.split(":");
-            c.m_symbol = symbolParts[0].toUpperCase();
-            if (symbolParts.length>1)
-                c.m_expiry = symbolParts[1];
-
-            try {
-                Symbol s = Symbol.valueOf(c.m_symbol);
-                c.m_secType = s.securityType.name();
-                c.m_exchange = s.exchange.name();
-                c.m_currency = s.currency.name();
-            } catch (IllegalArgumentException e){
-                c.m_secType = SecurityType.STK.name();
-                c.m_exchange = Exchange.SMART.name();
-                c.m_currency = Currency.USD.name();
-            }
-
-            countAndDisconnect(true);
-            ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);
-        }
+        flow.start(this);
     }
+
     @Override public void accountDownloadEnd(String accountName) { }
     @Override public void accountSummary(int reqId, String account, String tag, String value, String currency) {
         log.out("reqId=%d account=%s tag=%s value=%s currency=%s",
                 reqId, account, tag, value, currency);
     }
-    @Override public void accountSummaryEnd(int reqId) {
-        countAndDisconnect(false);
-    }
+    @Override public void accountSummaryEnd(int reqId) { }
     @Override public void bondContractDetails(int reqId, ContractDetails contractDetails) { }
     @Override public void commissionReport(CommissionReport commissionReport) { }
     @Override public void connectionClosed() { }
@@ -152,9 +251,7 @@ public class Divden implements EWrapper,Constants {
                 tickerId,TickType.getField(field),price,canAutoExecute);
     }
     @Override public void tickSize(int tickerId, int field, int size) { }
-    @Override public void tickSnapshotEnd(int reqId) {
-        countAndDisconnect(false);
-    }
+    @Override public void tickSnapshotEnd(int reqId) { }
     @Override public void tickString(int tickerId, int tickType, String value) { }
     @Override public void updateAccountTime(String timeStamp) { }
     @Override public void updateAccountValue(String key, String value, String currency, String accountName) { }
