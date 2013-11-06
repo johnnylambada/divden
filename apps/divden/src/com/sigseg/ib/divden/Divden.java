@@ -31,7 +31,18 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     }
     public Input input = new Input();
 
-    /* Constants */
+    public class Market {
+        Double bidPrice = null;
+        Double askPrice = null;
+        Double lastPrice = null;
+        boolean isComplete(){
+            return
+                bidPrice!=null &&
+                askPrice!=null &&
+                lastPrice!=null;
+        }
+    }
+    public Market market = new Market();
 
     private EClientSocket ibServer = new EClientSocket(this);
     private final Logger log;
@@ -167,12 +178,18 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         CALCULATING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                log.out("CALCULATING_POSITION bid=%f last=%f ask=%f",
+                    market.bidPrice,
+                    market.askPrice,
+                    market.lastPrice);
+
                 onPositionCalculated.trigger(context);
             }
         });
         WAITING_FOR_POSITION_ENTRY.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                log.out("We're not that advanced yet");
                 onEntryFound.trigger(context);
             }
         });
@@ -275,8 +292,18 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void tickGeneric(int tickerId, int tickType, double value) { }
     @Override public void tickOptionComputation(int tickerId, int field, double impliedVol, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice) { }
     @Override public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
-        log.out("tickerId=%d field=%s price=%f canAutoExecute=%b",
-                tickerId,TickType.getField(field),price,canAutoExecute);
+//        log.out("tickerId=%d field=%s price=%f canAutoExecute=%b",
+//                tickerId,TickType.getField(field),price,canAutoExecute);
+        boolean newData = true;
+        switch (field){
+            case TickType.BID: market.bidPrice = price; break;
+            case TickType.ASK: market.askPrice = price; break;
+            case TickType.LAST: market.lastPrice = price; break;
+            default: newData = false;
+        }
+        if (newData && market.isComplete()){
+            onMarketData.trigger(this);
+        }
     }
     @Override public void tickSize(int tickerId, int field, int size) { }
     @Override public void tickSnapshotEnd(int reqId) { }
