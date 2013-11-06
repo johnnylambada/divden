@@ -63,32 +63,36 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         }
         // build our FSM
         flow = FlowBuilder.from(SHOWING_REPORT).transit(
-            onReportShown.to(CONNECTING).transit(
-                onConnected.to(REQUESTING_MARKET_DATA).transit(
-                    onMarketDataRequested.to(CALCULATING_POSITION).transit(
-                        onPositionCalculated.to(WAITING_FOR_POSITION_ENTRY).transit(
-                            onEntryFound.to(ENTERING_POSITION).transit(
-                                onPositionEntered.to(WAITING_FOR_POSITION_EXIT).transit(
-                                    onExitFound.to(EXITING_POSITION).transit(
-                                        onPostionExited.to(REPORTING_PROFITS).transit(
-                                            onProfitsReported.finish(COMPLETE)
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
-        .executor(new Exec());
-    }
+            onReportShown.to(CONNECTING)
+        );
+        FlowBuilder.from(CONNECTING).transit(
+            onConnected.to(REQUESTING_MARKET_DATA)
+        );
+        FlowBuilder.from(REQUESTING_MARKET_DATA).transit(
+            onMarketDataRequested.to(CALCULATING_POSITION)
+        );
+        FlowBuilder.from(CALCULATING_POSITION).transit(
+            onPositionCalculated.to(WAITING_FOR_POSITION_ENTRY)
+        );
+        FlowBuilder.from(WAITING_FOR_POSITION_ENTRY).transit(
+            onEntryFound.to(ENTERING_POSITION)
+        );
+        FlowBuilder.from(ENTERING_POSITION).transit(
+            onPositionEntered.to(WAITING_FOR_POSITION_EXIT)
+        );
+        FlowBuilder.from(WAITING_FOR_POSITION_EXIT).transit(
+            onExitFound.to(EXITING_POSITION)
+        );
+        FlowBuilder.from(EXITING_POSITION).transit(
+            onPostionExited.to(REPORTING_PROFITS)
+        );
+        FlowBuilder.from(REPORTING_PROFITS).transit(
+            onProfitsReported.finish(COMPLETE)
+        );
 
-    private class Exec implements Executor {
-        @Override
-        public void execute(Runnable runnable) {
-            runnable.run();
-        }
+        flow.executor(new Executor() {
+            @Override public void execute(Runnable runnable) { runnable.run(); }
+        });
     }
 
     private void bindFlow() {
@@ -108,11 +112,11 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         CONNECTING.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-            ibServer.eConnect("localhost", twsPort, 0);
-            if (ibServer.isConnected()){
-                ibServer.reqAccountSummary(1, "All", "BuyingPower");
-                onConnected.trigger(context);
-            }
+                ibServer.eConnect("localhost", twsPort, 0);
+                if (ibServer.isConnected()){
+                    ibServer.reqAccountSummary(1, "All", "BuyingPower");
+                    onConnected.trigger(context);
+                }
             }
         });
         REQUESTING_MARKET_DATA.whenEnter(new StateHandler<Divden>() {
