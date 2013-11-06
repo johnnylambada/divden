@@ -3,6 +3,7 @@ package com.sigseg.ib.divden;
 import au.com.ds.ef.*;
 import au.com.ds.ef.call.StateHandler;
 import com.ib.client.*;
+import com.ib.controller.OrderType;
 
 import java.util.concurrent.Executor;
 
@@ -43,6 +44,37 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         }
     }
     public Market market = new Market();
+
+    public class BrokerOrder {
+        String name;
+        Integer shares;
+        Double price;
+        Double fee;
+        OrderType orderType;
+        void report(){
+            log.out(
+                "%s: s:%d p:%.2f f:%.2f",
+                name,shares,price,fee
+            );
+        }
+    }
+
+    public class OrderSuite {
+        BrokerOrder in = new BrokerOrder();
+        BrokerOrder out = new BrokerOrder();
+        BrokerOrder stop = new BrokerOrder();
+        Double movePercentToWin;
+        Double movePercentToLose;
+        void report(){
+            in.report();
+            out.report();
+            stop.report();
+            log.out("Win: %.2f%% Stop: %.2f%%",
+                movePercentToWin,
+                movePercentToLose);
+        }
+    }
+    public OrderSuite order = new OrderSuite();
 
     private EClientSocket ibServer = new EClientSocket(this);
     private final Logger log;
@@ -174,15 +206,51 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
                 ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);
                 onMarketDataRequested.trigger(context);
+
+                // DEBUG
+                /*
+                market.lastPrice = 35.53;
+                market.askPrice = market.bidPrice = market.lastPrice;
+                onMarketData.trigger(context);
+                */
             }
         });
         CALCULATING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                log.out("CALCULATING_POSITION bid=%f last=%f ask=%f",
+                logOutState(state,"bid=%f last=%f ask=%f",
                     market.bidPrice,
                     market.askPrice,
                     market.lastPrice);
+
+                // In
+                order.in.orderType = OrderType.MKT;
+                order.in.name = "inn";
+                order.in.price = market.lastPrice;
+                order.in.shares = (int) (input.riskCurrency / market.lastPrice);
+                order.in.fee = Math.max(1.0,0.005*order.in.shares);
+
+                // Out
+                order.out.name = "out";
+                order.out.orderType = OrderType.LMT;
+                order.out.shares = order.in.shares - input.numShares;
+                order.out.price = Math.ceil( 100* (
+                    (order.in.price*order.in.shares+2*order.in.fee+input.cashWin)/order.out.shares)
+                )/100;
+                order.out.fee = Math.max(1.0,0.005*order.out.shares);
+
+                // Stop
+                order.stop.name = "stp";
+                order.stop.orderType = OrderType.STP;
+                order.stop.shares = order.in.shares;
+                order.stop.price = order.in.price - (order.out.price-order.in.price)*2;
+                order.stop.fee = Math.max(1.0,0.005*order.stop.shares);
+
+                // Aggregate
+                order.movePercentToWin = 100.0*(order.out.price - order.in.price) / order.in.price;
+                order.movePercentToLose = 100.0*(order.stop.price - order.in.price) / order.in.price;
+
+                order.report();
 
                 onPositionCalculated.trigger(context);
             }
@@ -190,7 +258,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         WAITING_FOR_POSITION_ENTRY.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                log.out("We're not that advanced yet");
+                logOutState(state,"We're not that advanced yet");
                 onEntryFound.trigger(context);
             }
         });
@@ -221,16 +289,21 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         ERROR.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                log.err("ERROR EXIT");
+                logErrState(state,"ERROR EXIT");
             }
         });
         COMPLETE.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                log.out("That's all folks!");
+                logOutState(state,"That's all folks!");
             }
         });
     }
+
+    private void logOutState(State state, String format, Object... objects){ log.out(state.toString()+": "+format,objects); }
+    private void logOutState(State state, String s){ log.out(state.toString()+": "+s); }
+    private void logErrState(State state, String format, Object... objects){ log.err(state.toString()+": "+format,objects); }
+    private void logErrState(State state, String s){ log.err(state.toString()+": "+s); }
 
     public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
 
