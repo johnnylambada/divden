@@ -48,32 +48,33 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final Logger log;
 
     // defining states
-    private final State<Divden> SHOWING_REPORT = FlowBuilder.state();
-    private final State<Divden> CONNECTING = FlowBuilder.state();
-    private final State<Divden> REQUESTING_MARKET_DATA = FlowBuilder.state();
-    private final State<Divden> WAITING_FOR_MARKET_DATA = FlowBuilder.state();
-    private final State<Divden> CALCULATING_POSITION = FlowBuilder.state();
-    private final State<Divden> WAITING_FOR_POSITION_ENTRY = FlowBuilder.state();
-    private final State<Divden> ENTERING_POSITION = FlowBuilder.state();
-    private final State<Divden> WAITING_FOR_POSITION_EXIT = FlowBuilder.state();
-    private final State<Divden> EXITING_POSITION = FlowBuilder.state();
-    private final State<Divden> REPORTING_PROFITS = FlowBuilder.state();
-    private final State<Divden> ERROR = FlowBuilder.state();
-    private final State<Divden> COMPLETE = FlowBuilder.state();
+    private final State<Divden> SHOWING_REPORT = FlowBuilder.state("SHOWING_REPORT");
+    private final State<Divden> CONNECTING = FlowBuilder.state("CONNECTING");
+    private final State<Divden> REQUESTING_MARKET_DATA = FlowBuilder.state("REQUESTING_MARKET_DATA");
+    private final State<Divden> WAITING_FOR_MARKET_DATA = FlowBuilder.state("WAITING_FOR_MARKET_DATA");
+    private final State<Divden> CALCULATING_POSITION = FlowBuilder.state("CALCULATING_POSITION");
+    private final State<Divden> WAITING_FOR_POSITION_ENTRY = FlowBuilder.state("WAITING_FOR_POSITION_ENTRY");
+    private final State<Divden> ENTERING_POSITION = FlowBuilder.state("ENTERING_POSITION");
+    private final State<Divden> WAITING_FOR_POSITION_EXIT = FlowBuilder.state("WAITING_FOR_POSITION_EXIT");
+    private final State<Divden> EXITING_POSITION = FlowBuilder.state("EXITING_POSITION");
+    private final State<Divden> REPORTING_PROFITS = FlowBuilder.state("REPORTING_PROFITS");
+    private final State<Divden> ERROR = FlowBuilder.state("ERROR");
+    private final State<Divden> COMPLETE = FlowBuilder.state("COMPLETE");
 
     // defining events
-    private final Event<Divden> onReportShown = FlowBuilder.event();
-    private final Event<Divden> onConnected = FlowBuilder.event();
-    private final Event<Divden> onConnectFailed = FlowBuilder.event();
-    private final Event<Divden> onMarketDataRequested = FlowBuilder.event();
-    private final Event<Divden> onMarketData = FlowBuilder.event();
-    private final Event<Divden> onPositionCalculated = FlowBuilder.event();
-    private final Event<Divden> onEntryFound = FlowBuilder.event();
-    private final Event<Divden> onPositionEntered = FlowBuilder.event();
-    private final Event<Divden> onExitFound = FlowBuilder.event();
-    private final Event<Divden> onPositionExited = FlowBuilder.event();
-    private final Event<Divden> onProfitsReported = FlowBuilder.event();
-    private final Event<Divden> onErrorReported = FlowBuilder.event();
+    private final Event<Divden> onReportShown = FlowBuilder.event("onReportShown");
+    private final Event<Divden> onConnected = FlowBuilder.event("onConnected");
+    private final Event<Divden> onConnectFailed = FlowBuilder.event("onConnectFailed");
+    private final Event<Divden> onMarketDataRequested = FlowBuilder.event("onMarketDataRequested");
+    private final Event<Divden> onMarketData = FlowBuilder.event("onMarketData");
+    private final Event<Divden> onPositionCalculated = FlowBuilder.event("onPositionCalculated");
+    private final Event<Divden> onEntryFound = FlowBuilder.event("onEntryFound");
+    private final Event<Divden> onPositionEntered = FlowBuilder.event("onPositionEntered");
+    private final Event<Divden> onExitFound = FlowBuilder.event("onExitFound");
+    private final Event<Divden> onPositionExited = FlowBuilder.event("onPositionExited");
+    private final Event<Divden> onProfitsReported = FlowBuilder.event("onProfitsReported");
+    private final Event<Divden> onErrorReported = FlowBuilder.event("onErrorReported");
+
 
 
     private EasyFlow<Divden> flow;
