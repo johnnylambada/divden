@@ -296,6 +296,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"That's all folks!");
+                System.exit(0);
             }
         });
     }
