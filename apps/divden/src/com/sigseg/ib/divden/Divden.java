@@ -4,13 +4,16 @@ import au.com.ds.ef.*;
 import au.com.ds.ef.call.StateHandler;
 import com.ib.client.*;
 import com.ib.controller.OrderType;
+import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
 import java.util.concurrent.Executor;
 
 /**
  * Divden implements the divden approach
  */
 public class Divden extends StatefulContext implements EWrapper,Constants {
+    static org.slf4j.Logger log = LoggerFactory.getLogger(Divden.class);
 
     public class Input {
         private final static double CASH_WIN = 10.00;
@@ -52,10 +55,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         Double fee;
         OrderType orderType;
         void report(){
-            log.out(
+            log.info(String.format(Locale.US,
                 "%s: s:%d p:%.2f f:%.2f",
                 name,shares,price,fee
-            );
+            ));
         }
     }
 
@@ -69,15 +72,15 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             in.report();
             out.report();
             stop.report();
-            log.out("Win: %.2f%% Stop: %.2f%%",
+            log.info(String.format("Win: %.2f%% Stop: %.2f%%",
                 movePercentToWin,
-                movePercentToLose);
+                movePercentToLose));
         }
     }
     public OrderSuite order = new OrderSuite();
 
     private EClientSocket ibServer = new EClientSocket(this);
-    private final Logger log;
+//    private final Logger log;
 
     // defining states
     private final State<Divden> SHOWING_REPORT = FlowBuilder.state("SHOWING_REPORT");
@@ -85,6 +88,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final State<Divden> REQUESTING_MARKET_DATA = FlowBuilder.state("REQUESTING_MARKET_DATA");
     private final State<Divden> WAITING_FOR_MARKET_DATA = FlowBuilder.state("WAITING_FOR_MARKET_DATA");
     private final State<Divden> CALCULATING_POSITION = FlowBuilder.state("CALCULATING_POSITION");
+    private final State<Divden> ISSUING_ORDERS = FlowBuilder.state("ISSUING_ORDERS");
+    private final State<Divden> WAIT_FOR_ORDERS_RECEIVED = FlowBuilder.state("WAIT_FOR_ORDERS_RECEIVED");
     private final State<Divden> WAITING_FOR_POSITION_ENTRY = FlowBuilder.state("WAITING_FOR_POSITION_ENTRY");
     private final State<Divden> ENTERING_POSITION = FlowBuilder.state("ENTERING_POSITION");
     private final State<Divden> WAITING_FOR_POSITION_EXIT = FlowBuilder.state("WAITING_FOR_POSITION_EXIT");
@@ -100,6 +105,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final Event<Divden> onMarketDataRequested = FlowBuilder.event("onMarketDataRequested");
     private final Event<Divden> onMarketData = FlowBuilder.event("onMarketData");
     private final Event<Divden> onPositionCalculated = FlowBuilder.event("onPositionCalculated");
+    private final Event<Divden> onOrdersIssued = FlowBuilder.event("onOrdersIssued");
+    private final Event<Divden> onOrdersReceived = FlowBuilder.event("onOrdersReceived");
     private final Event<Divden> onEntryFound = FlowBuilder.event("onEntryFound");
     private final Event<Divden> onPositionEntered = FlowBuilder.event("onPositionEntered");
     private final Event<Divden> onExitFound = FlowBuilder.event("onExitFound");
@@ -130,7 +137,13 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             onMarketData.to(CALCULATING_POSITION)
         );
         FlowBuilder.from(CALCULATING_POSITION).transit(
-            onPositionCalculated.to(WAITING_FOR_POSITION_ENTRY)
+            onPositionCalculated.to(ISSUING_ORDERS)
+        );
+        FlowBuilder.from(ISSUING_ORDERS).transit(
+            onOrdersIssued.to(WAIT_FOR_ORDERS_RECEIVED)
+        );
+        FlowBuilder.from(WAIT_FOR_ORDERS_RECEIVED).transit(
+            onOrdersReceived.to(WAITING_FOR_POSITION_ENTRY)
         );
         FlowBuilder.from(WAITING_FOR_POSITION_ENTRY).transit(
             onEntryFound.to(ENTERING_POSITION)
@@ -154,19 +167,21 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         flow.executor(new Executor() {
             @Override public void execute(Runnable runnable) { runnable.run(); }
         });
+
+        flow.trace();
     }
 
     private void bindFlow() {
         SHOWING_REPORT.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-            log.out("Account:          %s", input.account);
-            log.out("Direction:        %s", input.isShort ? "Short" : "Long");
-            log.out("Symbol:           %s", input.symbol);
-            log.out("Casgh Win:        %f", input.cashWin);
-            log.out("Shares:           %d", input.numShares);
-            log.out("Risk Currency:    %f", input.riskCurrency);
-            log.out("Transaction Cost: %f", input.transactionCost);
+            log.info("Account:          {}", input.account);
+            log.info("Direction:        {}", input.isShort ? "Short" : "Long");
+            log.info("Symbol:           {}", input.symbol);
+            log.info("Casgh Win:        {}", input.cashWin);
+            log.info("Shares:           {}", input.numShares);
+            log.info("Risk Currency:    {}", input.riskCurrency);
+            log.info("Transaction Cost: {}", input.transactionCost);
             onReportShown.trigger(context);
             }
         });
@@ -218,10 +233,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         CALCULATING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                logOutState(state,"bid=%f last=%f ask=%f",
+                logOutState(state,String.format("bid=%f last=%f ask=%f",
                     market.bidPrice,
                     market.askPrice,
-                    market.lastPrice);
+                    market.lastPrice));
 
                 // In
                 order.in.orderType = OrderType.MKT;
@@ -253,6 +268,18 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 order.report();
 
                 onPositionCalculated.trigger(context);
+            }
+        });
+        ISSUING_ORDERS.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onOrdersIssued.trigger(context);
+            }
+        });
+        WAIT_FOR_ORDERS_RECEIVED.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                onOrdersReceived.trigger(context);
             }
         });
         WAITING_FOR_POSITION_ENTRY.whenEnter(new StateHandler<Divden>() {
@@ -301,15 +328,14 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         });
     }
 
-    private void logOutState(State state, String format, Object... objects){ log.out(state.toString()+": "+format,objects); }
-    private void logOutState(State state, String s){ log.out(state.toString()+": "+s); }
-    private void logErrState(State state, String format, Object... objects){ log.err(state.toString()+": "+format,objects); }
-    private void logErrState(State state, String s){ log.err(state.toString()+": "+s); }
+    private void logOutState(State state, String format, Object... objects){ log.debug(state.toString() + ": " + format, objects); }
+    private void logOutState(State state, String s){ log.debug(state.toString() + ": " + s); }
+    private void logErrState(State state, String format, Object... objects){ log.error(state.toString() + ": " + format, objects); }
+    private void logErrState(State state, String s){ log.error(state.toString() + ": " + s); }
 
     public class DivdenException extends Exception{public DivdenException(String m){super(m);}}
 
-    public Divden(Logger logger){
-        this.log = logger;
+    public Divden(){
         initFlow();
         bindFlow();
     }
@@ -326,8 +352,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
     @Override public void accountDownloadEnd(String accountName) { }
     @Override public void accountSummary(int reqId, String account, String tag, String value, String currency) {
-        log.out("reqId=%d account=%s tag=%s value=%s currency=%s",
-                reqId, account, tag, value, currency);
+        log.trace(String.format("reqId=%d account=%s tag=%s value=%s currency=%s",
+            reqId, account, tag, value, currency));
     }
     @Override public void accountSummaryEnd(int reqId) { }
     @Override public void bondContractDetails(int reqId, ContractDetails contractDetails) { }
@@ -338,13 +364,13 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void currentTime(long time) { }
     @Override public void deltaNeutralValidation(int reqId, UnderComp underComp) { }
     @Override public void error(Exception e) {
-        log.err("Exception: %s",e.getMessage());
+        log.error("Exception: {}", e.getMessage());
     }
     @Override public void error(String str) {
-        log.err(str);
+        log.error(str);
     }
     @Override public void error(int id, int errorCode, String errorMsg) {
-        log.err("id=%d code=%d msg=%s",id,errorCode,errorMsg);
+        log.error("id={} code={} msg={}", id, errorCode, errorMsg);
     }
     @Override public void execDetails(int reqId, Contract contract, Execution execution) { }
     @Override public void execDetailsEnd(int reqId) { }

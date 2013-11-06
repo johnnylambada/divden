@@ -1,11 +1,15 @@
 package com.sigseg.ib.divden;
 
+import au.com.ds.ef.EasyFlow;
+import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 
 /**
  * DivdenFactory makes a Divden
  */
 public class DivdenFactory {
+    static org.slf4j.Logger log = LoggerFactory.getLogger(DivdenFactory.class);
 
     private static String USAGE =
         "-a account\n"+
@@ -16,24 +20,23 @@ public class DivdenFactory {
         "-r riskCurrency\n"+
         "-n numShares\n"+
         "-c cashWin\n"+
+        "-v (verbose)\n"+
         "-x transactionCost\n\n";
 
     private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
 
     public class DivdenFactoryException extends Exception{public DivdenFactoryException(String m){super(m);}}
 
-    private final Logger log;
     private final Divden divden;
 
-    public static Divden make(String[] args, Map<String,String> env, Logger logger) throws Exception {
-        DivdenFactory df = new DivdenFactory(args,env,logger);
+    public static Divden make(String[] args, Map<String,String> env) throws Exception {
+        DivdenFactory df = new DivdenFactory(args,env);
         return df.divden;
     }
 
-    private DivdenFactory(String[] args, Map<String,String> env, Logger logger) throws Exception {
-        this.log = logger;
+    private DivdenFactory(String[] args, Map<String,String> env) throws Exception {
         try{
-            divden = new Divden(logger);
+            divden = new Divden();
             processEnv(env);
             processArgs(args);
             divden.validate();
@@ -79,6 +82,8 @@ public class DivdenFactory {
                 try { divden.input.transactionCost = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
+            } else if ("-v".equals(arg)){
+                // This is taken care of in Main
             } else {
                 throw new DivdenFactoryException("Invalid parameter " + arg);
             }
