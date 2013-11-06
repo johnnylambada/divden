@@ -48,35 +48,35 @@ public class DivdenFactory {
         for (int i=0; i<args.length; i++){
             String arg = args[i];
             if ("-a".equals(arg)){
-                try { divden.setAccount(args[++i]);}
+                try { divden.input.account=args[++i];}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
             } else if ("-h".equals(arg) || "--help".equals(arg)){
                 throw new DivdenFactoryException("");
             } else if ("-c".equals(arg)){
-                try { divden.setCashWin(Double.parseDouble(args[++i]));}
+                try { divden.input.cashWin = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-n".equals(arg)){
-                try { divden.setNumShares(Integer.parseInt(args[++i]));}
+                try { divden.input.numShares = Integer.parseInt(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-p".equals(arg)){
-                try { divden.setTwsPort(Integer.parseInt(args[++i]));}
+                try { divden.input.twsPort = Integer.parseInt(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-r".equals(arg)){
-                try { divden.setRiskCurrency(Double.parseDouble(args[++i]));}
+                try { divden.input.riskCurrency = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-s".equals(arg)){
-                try { divden.setSymbol(args[++i]);}
+                try { divden.input.symbol = args[++i];}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
             } else if ("--short".equals(arg)){
-                divden.setIsShort(true);
+                divden.input.isShort = true;
             } else if ("--long".equals(arg)){
-                divden.setIsShort(false);
+                divden.input.isShort = false;
             } else if ("-x".equals(arg)){
-                try { divden.setTransactionCost(Double.parseDouble(args[++i]));}
+                try { divden.input.transactionCost = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
             } else {
@@ -95,7 +95,7 @@ public class DivdenFactory {
 
     public void processEnv(Map<String,String> env) {
         if (env.containsKey(ENV_IB_ACCOUNT)){
-            divden.setAccount(env.get(ENV_IB_ACCOUNT));
+            divden.input.account = env.get(ENV_IB_ACCOUNT);
         }
     }
 }

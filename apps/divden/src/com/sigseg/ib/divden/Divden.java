@@ -11,23 +11,27 @@ import java.util.concurrent.Executor;
  */
 public class Divden extends StatefulContext implements EWrapper,Constants {
 
-    /* Constants */
-    private final static double CASH_WIN = 10.00;
-    private final static int NUM_SHARES = 1;
-    private final static double RISK_CURRENCY = 10000.00;
-    private final static String SYMBOL="T"; // AT&T
-    private final static double TRANSACTION_COST = 1.50;
-    private final static int TWS_PORT = 7496;
+    public class Input {
+        private final static double CASH_WIN = 10.00;
+        private final static int NUM_SHARES = 1;
+        private final static double RISK_CURRENCY = 10000.00;
+        private final static String SYMBOL="T"; // AT&T
+        private final static double TRANSACTION_COST = 1.50;
+        private final static int TWS_PORT = 7496;
 
-    /* Input parameters */
-    private String account = null;
-    private double cashWin = CASH_WIN;
-    private int numShares = NUM_SHARES;
-    private double riskCurrency = RISK_CURRENCY;
-    private boolean isShort = false;
-    private String symbol = SYMBOL;
-    private double transactionCost = TRANSACTION_COST;
-    private int twsPort = TWS_PORT;
+        /* Input parameters */
+        public String account = null;
+        public double cashWin = CASH_WIN;
+        public int numShares = NUM_SHARES;
+        public double riskCurrency = RISK_CURRENCY;
+        public boolean isShort = false;
+        public String symbol = SYMBOL;
+        public double transactionCost = TRANSACTION_COST;
+        public int twsPort = TWS_PORT;
+    }
+    public Input input = new Input();
+
+    /* Constants */
 
     private EClientSocket ibServer = new EClientSocket(this);
     private final Logger log;
@@ -36,24 +40,30 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final State<Divden> SHOWING_REPORT = FlowBuilder.state();
     private final State<Divden> CONNECTING = FlowBuilder.state();
     private final State<Divden> REQUESTING_MARKET_DATA = FlowBuilder.state();
+    private final State<Divden> WAITING_FOR_MARKET_DATA = FlowBuilder.state();
     private final State<Divden> CALCULATING_POSITION = FlowBuilder.state();
     private final State<Divden> WAITING_FOR_POSITION_ENTRY = FlowBuilder.state();
     private final State<Divden> ENTERING_POSITION = FlowBuilder.state();
     private final State<Divden> WAITING_FOR_POSITION_EXIT = FlowBuilder.state();
     private final State<Divden> EXITING_POSITION = FlowBuilder.state();
     private final State<Divden> REPORTING_PROFITS = FlowBuilder.state();
+    private final State<Divden> ERROR = FlowBuilder.state();
     private final State<Divden> COMPLETE = FlowBuilder.state();
 
     // defining events
     private final Event<Divden> onReportShown = FlowBuilder.event();
     private final Event<Divden> onConnected = FlowBuilder.event();
+    private final Event<Divden> onConnectFailed = FlowBuilder.event();
     private final Event<Divden> onMarketDataRequested = FlowBuilder.event();
+    private final Event<Divden> onMarketData = FlowBuilder.event();
     private final Event<Divden> onPositionCalculated = FlowBuilder.event();
     private final Event<Divden> onEntryFound = FlowBuilder.event();
     private final Event<Divden> onPositionEntered = FlowBuilder.event();
     private final Event<Divden> onExitFound = FlowBuilder.event();
-    private final Event<Divden> onPostionExited = FlowBuilder.event();
+    private final Event<Divden> onPositionExited = FlowBuilder.event();
     private final Event<Divden> onProfitsReported = FlowBuilder.event();
+    private final Event<Divden> onErrorReported = FlowBuilder.event();
+
 
     private EasyFlow<Divden> flow;
 
@@ -66,10 +76,14 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             onReportShown.to(CONNECTING)
         );
         FlowBuilder.from(CONNECTING).transit(
-            onConnected.to(REQUESTING_MARKET_DATA)
+            onConnected.to(REQUESTING_MARKET_DATA),
+            onConnectFailed.to(ERROR)
         );
         FlowBuilder.from(REQUESTING_MARKET_DATA).transit(
-            onMarketDataRequested.to(CALCULATING_POSITION)
+            onMarketDataRequested.to(WAITING_FOR_MARKET_DATA)
+        );
+        FlowBuilder.from(WAITING_FOR_MARKET_DATA).transit(
+            onMarketData.to(CALCULATING_POSITION)
         );
         FlowBuilder.from(CALCULATING_POSITION).transit(
             onPositionCalculated.to(WAITING_FOR_POSITION_ENTRY)
@@ -84,7 +98,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             onExitFound.to(EXITING_POSITION)
         );
         FlowBuilder.from(EXITING_POSITION).transit(
-            onPostionExited.to(REPORTING_PROFITS)
+            onPositionExited.to(REPORTING_PROFITS)
+        );
+        FlowBuilder.from(ERROR).transit(
+            onErrorReported.finish(COMPLETE)
         );
         FlowBuilder.from(REPORTING_PROFITS).transit(
             onProfitsReported.finish(COMPLETE)
@@ -99,23 +116,25 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         SHOWING_REPORT.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-            log.out("Account:          %s", account);
-            log.out("Direction:        %s", isShort ? "Short" : "Long");
-            log.out("Symbol:           %s", symbol);
-            log.out("Casgh Win:        %f", cashWin);
-            log.out("Shares:           %d", numShares);
-            log.out("Risk Currency:    %f", riskCurrency);
-            log.out("Transaction Cost: %f", transactionCost);
+            log.out("Account:          %s", input.account);
+            log.out("Direction:        %s", input.isShort ? "Short" : "Long");
+            log.out("Symbol:           %s", input.symbol);
+            log.out("Casgh Win:        %f", input.cashWin);
+            log.out("Shares:           %d", input.numShares);
+            log.out("Risk Currency:    %f", input.riskCurrency);
+            log.out("Transaction Cost: %f", input.transactionCost);
             onReportShown.trigger(context);
             }
         });
         CONNECTING.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                ibServer.eConnect("localhost", twsPort, 0);
+                ibServer.eConnect("localhost", input.twsPort, 0);
                 if (ibServer.isConnected()){
                     ibServer.reqAccountSummary(1, "All", "BuyingPower");
                     onConnected.trigger(context);
+                } else {
+                    onConnectFailed.trigger(context);
                 }
             }
         });
@@ -125,7 +144,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 Ticker ticker = new Ticker();
                 Contract c = ticker.contract = new Contract();
 
-                String[] symbolParts = symbol.split(":");
+                String[] symbolParts = input.symbol.split(":");
                 c.m_symbol = symbolParts[0].toUpperCase();
                 if (symbolParts.length>1)
                     c.m_expiry = symbolParts[1];
@@ -172,13 +191,19 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         EXITING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
-                onPostionExited.trigger(context);
+                onPositionExited.trigger(context);
             }
         });
         REPORTING_PROFITS.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 onProfitsReported.trigger(context);
+            }
+        });
+        ERROR.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                log.err("ERROR EXIT");
             }
         });
         COMPLETE.whenEnter(new StateHandler<Divden>() {
@@ -193,18 +218,17 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
     public Divden(Logger logger){
         this.log = logger;
+        initFlow();
+        bindFlow();
     }
 
     public void validate() throws DivdenException {
-        if (account==null){
+        if (input.account==null){
             throw new DivdenException("Account cannot be null");
         }
     }
 
     public void start() {
-        initFlow();
-        bindFlow();
-
         flow.start(this);
     }
 
@@ -263,30 +287,5 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void updateMktDepthL2(int tickerId, int position, String marketMaker, int operation, int side, double price, int size) {}
     @Override public void updateNewsBulletin(int msgId, int msgType, String message, String origExchange) { }
     @Override public void updatePortfolio(Contract contract, int position, double marketPrice, double marketValue, double averageCost, double unrealizedPNL, double realizedPNL, String accountName) { }
-
-    // Getters and Setters
-    public String getAccount() { return account; }
-    public void setAccount(String account) { this.account = account; }
-
-    public double getCashWin() { return cashWin; }
-    public void setCashWin(double cashWin) { this.cashWin = cashWin; }
-
-    public int getNumShares() { return numShares; }
-    public void setNumShares(int numShares) { this.numShares = numShares; }
-
-    public double getRiskCurrency() { return riskCurrency; }
-    public void setRiskCurrency(double riskCurrency) { this.riskCurrency = riskCurrency; }
-
-    public boolean getIsShort() { return isShort; }
-    public void setIsShort(boolean isShort) { this.isShort = isShort; }
-
-    public String getSymbol() { return symbol; }
-    public void setSymbol(String symbol) { this.symbol = symbol; }
-
-    public double getTransactionCost() { return transactionCost; }
-    public void setTransactionCost(double transactionCost) { this.transactionCost = transactionCost; }
-
-    public int getTwsPort() { return twsPort; }
-    public void setTwsPort(int twsPort) { this.twsPort = twsPort; }
 
 }
