@@ -188,6 +188,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         CONNECTING.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 ibServer.eConnect("localhost", input.twsPort, 0);
                 if (ibServer.isConnected()){
                     ibServer.reqAccountSummary(1, "All", "BuyingPower");
@@ -200,6 +201,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         REQUESTING_MARKET_DATA.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 Ticker ticker = new Ticker();
                 Contract c = ticker.contract = new Contract();
 
@@ -273,12 +275,14 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         ISSUING_ORDERS.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onOrdersIssued.trigger(context);
             }
         });
         WAIT_FOR_ORDERS_RECEIVED.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onOrdersReceived.trigger(context);
             }
         });
@@ -292,24 +296,28 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         ENTERING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onPositionEntered.trigger(context);
             }
         });
         WAITING_FOR_POSITION_EXIT.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onExitFound.trigger(context);
             }
         });
         EXITING_POSITION.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onPositionExited.trigger(context);
             }
         });
         REPORTING_PROFITS.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
                 onProfitsReported.trigger(context);
             }
         });
@@ -328,8 +336,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         });
     }
 
-    private void logOutState(State state, String format, Object... objects){ log.debug(state.toString() + ": " + format, objects); }
-    private void logOutState(State state, String s){ log.debug(state.toString() + ": " + s); }
+    private void logOutState(State state, String format, Object... objects){ log.info(state.toString() + ": " + format, objects); }
+    private void logOutState(State state, String s){ log.info(state.toString() + ": " + s); }
     private void logErrState(State state, String format, Object... objects){ log.error(state.toString() + ": " + format, objects); }
     private void logErrState(State state, String s){ log.error(state.toString() + ": " + s); }
 
