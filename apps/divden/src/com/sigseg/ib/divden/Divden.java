@@ -148,7 +148,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             onMarketDataRequested.to(WAITING_FOR_MARKET_DATA)
         );
         FlowBuilder.from(WAITING_FOR_MARKET_DATA).transit(
-            onMarketData.to(CALCULATING_POSITION)
+            onMarketData.ignoreOutOfState().to(CALCULATING_POSITION)
         );
         FlowBuilder.from(CALCULATING_POSITION).transit(
             onPositionCalculated.to(ISSUING_ORDERS)
@@ -432,7 +432,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void marketDataType(int reqId, int marketDataType) { }
     @Override public void nextValidId(int orderId) {
         os.nextValidOrderId = orderId;
-        log.debug("nextValidId={}", orderId);
+        log.info("nextValidId={}", orderId);
     }
     @Override public void openOrder(int orderId, Contract contract, Order order, OrderState orderState) { }
     @Override public void openOrderEnd() { }
@@ -453,8 +453,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void tickGeneric(int tickerId, int tickType, double value) { }
     @Override public void tickOptionComputation(int tickerId, int field, double impliedVol, double delta, double optPrice, double pvDividend, double gamma, double vega, double theta, double undPrice) { }
     @Override public void tickPrice(int tickerId, int field, double price, int canAutoExecute) {
-//        log.out("tickerId=%d field=%s price=%f canAutoExecute=%b",
-//                tickerId,TickType.getField(field),price,canAutoExecute);
+        log.info(String.format(
+            "tickerId=%d field=%s price=%f canAutoExecute=%b",
+            tickerId,TickType.getField(field),price,canAutoExecute
+        ));
         boolean newData = true;
         switch (field){
             case TickType.BID: market.bidPrice = price; break;
