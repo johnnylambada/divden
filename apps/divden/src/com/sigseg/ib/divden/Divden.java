@@ -18,8 +18,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     public static final int CLIENT_ID = 22;
     public static final int INVALID_ORDER_ID = -1;
 
-    public int nextId = (int)System.currentTimeMillis()/1000;
-
     public class Input {
         private final static double CASH_WIN = 10.00;
         private final static int NUM_SHARES = 1;
@@ -62,14 +60,15 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         Order order = new Order();
         void report(){
             log.info(String.format(Locale.US,
-                "%s: s:%d p:%.2f f:%.2f",
-                name,shares,price,fee
+                "%s: id:%d s:%d p:%.2f f:%.2f",
+                name,order.m_orderId,shares,price,fee
             ));
         }
     }
 
     public class OrderSuite {
         int nextValidOrderId = -1;
+        Contract contract = new Contract();
         BrokerOrder in = new BrokerOrder();
         BrokerOrder out = new BrokerOrder();
         BrokerOrder stop = new BrokerOrder();
@@ -92,8 +91,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         }
     }
     public OrderSuite os = new OrderSuite();
-
-    Contract contract = new Contract();
 
     private EClientSocket ibServer = new EClientSocket(this);
 //    private final Logger log;
@@ -216,7 +213,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
-                Contract c = contract;
+                Contract c = os.contract;
 
                 String[] symbolParts = input.symbol.split(":");
                 c.m_symbol = symbolParts[0].toUpperCase();
@@ -234,7 +231,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     c.m_currency = Currency.USD.name();
                 }
 
-                ibServer.reqMktData(++nextId, contract, JavaClient.GENERIC_TICKS, false);
+                ibServer.reqMktData(os.nextValidOrderId++, os.contract, JavaClient.GENERIC_TICKS, false);
                 onMarketDataRequested.trigger(context);
 
                 // DEBUG
@@ -280,7 +277,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 os.movePercentToWin = 100.0*(os.out.price - os.in.price) / os.in.price;
                 os.movePercentToLose = 100.0*(os.stop.price - os.in.price) / os.in.price;
 
-                os.report();
 
                 onPositionCalculated.trigger(context);
             }
@@ -318,7 +314,9 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 }
                 os.out.order.m_action = os.out.order.m_account;
 
-                ibServer.placeOrder( ++nextId, contract, os.in.order );
+                os.report();
+
+                ibServer.placeOrder( os.in.order.m_orderId, os.contract, os.in.order );
 
                 onOrdersIssued.trigger(context);
             }
