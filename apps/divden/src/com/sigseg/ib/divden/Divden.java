@@ -4,6 +4,7 @@ import au.com.ds.ef.*;
 import au.com.ds.ef.call.StateHandler;
 import com.ib.client.*;
 import com.ib.controller.OrderType;
+import com.ib.controller.Types;
 import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
@@ -14,6 +15,10 @@ import java.util.concurrent.Executor;
  */
 public class Divden extends StatefulContext implements EWrapper,Constants {
     static org.slf4j.Logger log = LoggerFactory.getLogger(Divden.class);
+    public static final int CLIENT_ID = 22;
+    public static final int INVALID_ORDER_ID = -1;
+
+    public int nextId = 0;
 
     public class Input {
         private final static double CASH_WIN = 10.00;
@@ -54,6 +59,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         Double price;
         Double fee;
         OrderType orderType;
+        Order order = new Order();
         void report(){
             log.info(String.format(Locale.US,
                 "%s: s:%d p:%.2f f:%.2f",
@@ -63,6 +69,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     }
 
     public class OrderSuite {
+        int nextValidOrderId = -1;
         BrokerOrder in = new BrokerOrder();
         BrokerOrder out = new BrokerOrder();
         BrokerOrder stop = new BrokerOrder();
@@ -76,8 +83,17 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 movePercentToWin,
                 movePercentToLose));
         }
+        BrokerOrder[] getOrders(){
+            BrokerOrder[] ret = new BrokerOrder[3];
+            ret[0]=in;
+            ret[1]=out;
+            ret[2]=stop;
+            return ret;
+        }
     }
-    public OrderSuite order = new OrderSuite();
+    public OrderSuite os = new OrderSuite();
+
+    Contract contract = new Contract();
 
     private EClientSocket ibServer = new EClientSocket(this);
 //    private final Logger log;
@@ -113,8 +129,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final Event<Divden> onPositionExited = FlowBuilder.event("onPositionExited");
     private final Event<Divden> onProfitsReported = FlowBuilder.event("onProfitsReported");
     private final Event<Divden> onErrorReported = FlowBuilder.event("onErrorReported");
-
-
 
     private EasyFlow<Divden> flow;
 
@@ -202,8 +216,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
-                Ticker ticker = new Ticker();
-                Contract c = ticker.contract = new Contract();
+                Contract c = contract;
 
                 String[] symbolParts = input.symbol.split(":");
                 c.m_symbol = symbolParts[0].toUpperCase();
@@ -221,7 +234,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     c.m_currency = Currency.USD.name();
                 }
 
-                ibServer.reqMktData(ticker.id, ticker.contract, JavaClient.GENERIC_TICKS, false);
+                ibServer.reqMktData(++nextId, contract, JavaClient.GENERIC_TICKS, false);
                 onMarketDataRequested.trigger(context);
 
                 // DEBUG
@@ -241,33 +254,33 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     market.lastPrice));
 
                 // In
-                order.in.orderType = OrderType.MKT;
-                order.in.name = "inn";
-                order.in.price = market.lastPrice;
-                order.in.shares = (int) (input.riskCurrency / market.lastPrice);
-                order.in.fee = Math.max(1.0,0.005*order.in.shares);
+                os.in.orderType = OrderType.MKT;
+                os.in.name = "inn";
+                os.in.price = market.lastPrice;
+                os.in.shares = (int) (input.riskCurrency / market.lastPrice);
+                os.in.fee = Math.max(1.0,0.005* os.in.shares);
 
                 // Out
-                order.out.name = "out";
-                order.out.orderType = OrderType.LMT;
-                order.out.shares = order.in.shares - input.numShares;
-                order.out.price = Math.ceil( 100* (
-                    (order.in.price*order.in.shares+2*order.in.fee+input.cashWin)/order.out.shares)
+                os.out.name = "out";
+                os.out.orderType = OrderType.LMT;
+                os.out.shares = os.in.shares - input.numShares;
+                os.out.price = Math.ceil( 100* (
+                    (os.in.price* os.in.shares+2* os.in.fee+input.cashWin)/ os.out.shares)
                 )/100;
-                order.out.fee = Math.max(1.0,0.005*order.out.shares);
+                os.out.fee = Math.max(1.0,0.005* os.out.shares);
 
                 // Stop
-                order.stop.name = "stp";
-                order.stop.orderType = OrderType.STP;
-                order.stop.shares = order.in.shares;
-                order.stop.price = order.in.price - (order.out.price-order.in.price)*2;
-                order.stop.fee = Math.max(1.0,0.005*order.stop.shares);
+                os.stop.name = "stp";
+                os.stop.orderType = OrderType.STP;
+                os.stop.shares = os.in.shares;
+                os.stop.price = os.in.price - (os.out.price- os.in.price)*2;
+                os.stop.fee = Math.max(1.0,0.005* os.stop.shares);
 
                 // Aggregate
-                order.movePercentToWin = 100.0*(order.out.price - order.in.price) / order.in.price;
-                order.movePercentToLose = 100.0*(order.stop.price - order.in.price) / order.in.price;
+                os.movePercentToWin = 100.0*(os.out.price - os.in.price) / os.in.price;
+                os.movePercentToLose = 100.0*(os.stop.price - os.in.price) / os.in.price;
 
-                order.report();
+                os.report();
 
                 onPositionCalculated.trigger(context);
             }
@@ -276,6 +289,36 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
+
+                // Order
+                if (os.nextValidOrderId == INVALID_ORDER_ID)
+                    throw new DivdenException("no valid order id given");
+                for (BrokerOrder o : os.getOrders()){
+                    o.order.m_clientId = CLIENT_ID;
+                    o.order.m_orderId = os.nextValidOrderId++;
+                    o.order.m_orderType = o.orderType.getApiString();
+                    o.order.m_lmtPrice = o.price;
+                    o.order.m_totalQuantity = o.shares;
+                    o.order.m_auxPrice = 0.0;
+                    o.order.m_goodAfterTime = "";
+                    o.order.m_goodTillDate = "";
+
+                    // DEBUG
+                    o.order.m_orderType = OrderType.LMT.toString();
+                    o.order.m_lmtPrice = 0.50;
+                    o.order.m_totalQuantity = 1;
+                }
+                if (input.isShort){
+                    os.in.order.m_action = Types.Action.SSHORT.getApiString();
+                    os.out.order.m_action = Types.Action.BUY.getApiString();
+                } else {
+                    os.in.order.m_action = Types.Action.BUY.getApiString();
+                    os.out.order.m_action = Types.Action.SELL.getApiString();
+                }
+                os.out.order.m_action = os.out.order.m_account;
+
+                ibServer.placeOrder( ++nextId, contract, os.in.order );
+
                 onOrdersIssued.trigger(context);
             }
         });
@@ -386,7 +429,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     @Override public void historicalData(int reqId, String date, double open, double high, double low, double close, int volume, int count, double WAP, boolean hasGaps) { }
     @Override public void managedAccounts(String accountsList) { }
     @Override public void marketDataType(int reqId, int marketDataType) { }
-    @Override public void nextValidId(int orderId) { }
+    @Override public void nextValidId(int orderId) {
+        os.nextValidOrderId = orderId;
+        log.debug("nextValidId={}", orderId);
+    }
     @Override public void openOrder(int orderId, Contract contract, Order order, OrderState orderState) { }
     @Override public void openOrderEnd() { }
     @Override public void orderStatus(int orderId, String status, int filled, int remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, String whyHeld) { }
