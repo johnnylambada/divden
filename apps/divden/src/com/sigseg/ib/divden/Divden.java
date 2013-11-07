@@ -18,7 +18,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     public static final int CLIENT_ID = 22;
     public static final int INVALID_ORDER_ID = -1;
 
-    public int nextId = 0;
+    public int nextId = (int)System.currentTimeMillis()/1000;
 
     public class Input {
         private final static double CASH_WIN = 10.00;
@@ -302,6 +302,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_auxPrice = 0.0;
                     o.order.m_goodAfterTime = "";
                     o.order.m_goodTillDate = "";
+                    o.order.m_account = input.account;
 
                     // DEBUG
                     o.order.m_orderType = OrderType.LMT.toString();
