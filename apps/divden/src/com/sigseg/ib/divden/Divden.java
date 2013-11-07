@@ -24,7 +24,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         private final static double CASH_WIN = 10.00;
         private final static int NUM_SHARES = 1;
         private final static double RISK_CURRENCY = 10000.00;
-        private final static String SYMBOL="T"; // AT&T
+        private final static String SYMBOL="goog"; // AT&T
         private final static double TRANSACTION_COST = 1.50;
         private final static int TWS_PORT = 7496;
 
@@ -182,7 +182,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override public void execute(Runnable runnable) { runnable.run(); }
         });
 
-        flow.trace();
+//        flow.trace();
     }
 
     private void bindFlow() {
@@ -327,7 +327,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
-                onOrdersReceived.trigger(context);
+                //onOrdersReceived.trigger(context);
             }
         });
         WAITING_FOR_POSITION_ENTRY.whenEnter(new StateHandler<Divden>() {
@@ -436,7 +436,12 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     }
     @Override public void openOrder(int orderId, Contract contract, Order order, OrderState orderState) { }
     @Override public void openOrderEnd() { }
-    @Override public void orderStatus(int orderId, String status, int filled, int remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, String whyHeld) { }
+    @Override public void orderStatus(int orderId, String status, int filled, int remaining, double avgFillPrice, int permId, int parentId, double lastFillPrice, int clientId, String whyHeld) {
+        log.info(String.format(
+            "orderId=%d status=%s filled=%d remaining=%d avgFillPrice=%f permId=%d parentId=%d lastFillPrice=%f clientId=%d whyHeld=%s",
+            orderId,status,filled,remaining,avgFillPrice,permId,parentId,lastFillPrice,clientId,whyHeld
+        ));
+    }
     @Override public void position(String account, Contract contract, int pos, double avgCost) { }
     @Override public void positionEnd() { }
     @Override public void realtimeBar(int reqId, long time, double open, double high, double low, double close, long volume, double wap, int count) { }
