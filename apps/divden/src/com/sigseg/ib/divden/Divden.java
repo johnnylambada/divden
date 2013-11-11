@@ -9,7 +9,9 @@ import com.ib.controller.Types;
 import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
@@ -87,15 +89,22 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 movePercentToWin,
                 movePercentToLose));
         }
-        BrokerOrder[] getOrders(){
+        BrokerOrder[] getAllOrders(){
             BrokerOrder[] ret = new BrokerOrder[3];
             ret[0]=in;
             ret[1]=out;
             ret[2]=stop;
             return ret;
         }
+        BrokerOrder[] getAllOrdersExcept(BrokerOrder except){
+            List<BrokerOrder> list = new ArrayList<BrokerOrder>(3);
+            for(BrokerOrder bo : getAllOrders())
+                if (bo!=except)
+                    list.add(bo);
+            return list.toArray(new BrokerOrder[list.size()]);
+        }
         BrokerOrder findBrokerOrderByOrderId(int orderId) throws OrderNotFoundException {
-            for(BrokerOrder bo : getOrders())
+            for(BrokerOrder bo : getAllOrders())
                 if (bo.order.m_orderId == orderId)
                     return bo;
             throw new OrderNotFoundException();
@@ -295,7 +304,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     market.lastPrice));
 
                 // In
-                os.in.orderType = OrderType.MKT;
+                os.in.orderType = OrderType.LMT;
                 os.in.name = "inn";
                 os.in.price = market.lastPrice;
                 os.in.shares = (int) (input.riskCurrency / market.lastPrice);
@@ -334,7 +343,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 // Order
                 if (os.nextValidOrderId == INVALID_ORDER_ID)
                     throw new DivdenException("no valid order id given");
-                for (BrokerOrder o : os.getOrders()){
+                for (BrokerOrder o : os.getAllOrders()){
                     o.order.m_clientId = CLIENT_ID;
                     o.order.m_orderId = os.nextValidOrderId++;
                     o.order.m_orderType = o.orderType.getApiString();
@@ -343,14 +352,12 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
-                    o.order.m_transmit = false;
+                    o.order.m_transmit = false;                     // TODO: DEBUG
                 }
-                for (BrokerOrder o : os.getOrders()){
-                    if (o!=os.in){
-                        o.order.m_ocaGroup = oca;
-                        o.order.m_ocaType = Types.OcaType.CancelWithBlocking.ordinal();
-                        o.order.m_parentId = os.in.order.m_orderId;
-                    }
+                for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
+                    o.order.m_ocaGroup = oca;
+                    o.order.m_ocaType = Types.OcaType.CancelWithBlocking.ordinal();
+                    o.order.m_parentId = os.in.order.m_orderId;
                 }
 
                 os.in.order.m_lmtPrice = os.in.price;
@@ -368,11 +375,15 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
                 os.report();
 
+                // This has to happen before the orders are actually placed because the
+                // async "Submitted" can happen at any time and if we're not in the right
+                // state, we'll lose them
+                onOrdersIssued.trigger(context);
+
                 ibServer.placeOrder( os.in.order.m_orderId, os.contract, os.in.order );
                 ibServer.placeOrder( os.out.order.m_orderId, os.contract, os.out.order );
                 ibServer.placeOrder( os.stop.order.m_orderId, os.contract, os.stop.order );
 
-                onOrdersIssued.trigger(context);
             }
         });
         WAIT_FOR_ORDERS_RECEIVED.whenEnter(new StateHandler<Divden>() {
