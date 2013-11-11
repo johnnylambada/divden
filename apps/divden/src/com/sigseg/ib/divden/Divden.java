@@ -8,6 +8,8 @@ import com.ib.controller.OrderType;
 import com.ib.controller.Types;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.Executor;
 
@@ -327,6 +329,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
+                String oca = ocaGroup();
 
                 // Order
                 if (os.nextValidOrderId == INVALID_ORDER_ID)
@@ -335,15 +338,25 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_clientId = CLIENT_ID;
                     o.order.m_orderId = os.nextValidOrderId++;
                     o.order.m_orderType = o.orderType.getApiString();
-                    o.order.m_lmtPrice = o.price;
                     o.order.m_totalQuantity = o.shares;
-                    o.order.m_auxPrice = 0.0;
                     o.order.m_goodAfterTime = "";
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
                     o.order.m_transmit = false;
                 }
+                for (BrokerOrder o : os.getOrders()){
+                    if (o!=os.in){
+                        o.order.m_ocaGroup = oca;
+                        o.order.m_ocaType = Types.OcaType.CancelWithBlocking.ordinal();
+                        o.order.m_parentId = os.in.order.m_orderId;
+                    }
+                }
+
+                os.in.order.m_lmtPrice = os.in.price;
+                os.out.order.m_lmtPrice = os.out.price;
+                os.stop.order.m_auxPrice = os.stop.price;
+
                 if (input.isShort){
                     os.in.order.m_action = Types.Action.SSHORT.getApiString();
                     os.out.order.m_action = Types.Action.BUY.getApiString();
@@ -453,6 +466,12 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
     public void start() {
         flow.start(this);
+    }
+
+    private String ocaGroup(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        String ret = "oca"+dateFormat.format(new Date());
+        return ret;
     }
 
     @Override public void accountDownloadEnd(String accountName) { }
