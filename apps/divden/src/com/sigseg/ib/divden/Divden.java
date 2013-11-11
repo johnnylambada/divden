@@ -23,7 +23,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         private final static double CASH_WIN = 10.00;
         private final static int NUM_SHARES = 1;
         private final static double RISK_CURRENCY = 10000.00;
-        private final static String SYMBOL="goog"; // AT&T
+        private final static String SYMBOL="t"; // AT&T
         private final static double TRANSACTION_COST = 1.50;
         private final static int TWS_PORT = 7496;
 
@@ -342,10 +342,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
-                    // DEBUG
-                    o.order.m_orderType = OrderType.LMT.toString();
-                    o.order.m_lmtPrice = 0.50;
-                    o.order.m_totalQuantity = 1;
+                    o.order.m_transmit = false;
                 }
                 if (input.isShort){
                     os.in.order.m_action = Types.Action.SSHORT.getApiString();
@@ -353,14 +350,14 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 } else {
                     os.in.order.m_action = Types.Action.BUY.getApiString();
                     os.out.order.m_action = Types.Action.SELL.getApiString();
+                    os.stop.order.m_action = Types.Action.SELL.getApiString();
                 }
-                os.out.order.m_action = os.out.order.m_account;
 
                 os.report();
 
                 ibServer.placeOrder( os.in.order.m_orderId, os.contract, os.in.order );
-//                ibServer.placeOrder( os.out.order.m_orderId, os.contract, os.out.order );
-//                ibServer.placeOrder( os.stop.order.m_orderId, os.contract, os.stop.order );
+                ibServer.placeOrder( os.out.order.m_orderId, os.contract, os.out.order );
+                ibServer.placeOrder( os.stop.order.m_orderId, os.contract, os.stop.order );
 
                 onOrdersIssued.trigger(context);
             }
@@ -376,8 +373,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     if (
                         os.in.ordStatus!=null
 // TODO: Uncomment these when all the orders are submitted in ISSUING_ORDERS
-//                        && os.out.ordStatus!=null
-//                        && os.stop.ordStatus!=null
+                        && os.out.ordStatus!=null
+                        && os.stop.ordStatus!=null
                     ) {
                         onAllOrdersSubmitted.trigger(context);  // Continue to next step
                     } else {
