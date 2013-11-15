@@ -23,6 +23,9 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     public static final int CLIENT_ID = 22;
     public static final int INVALID_ORDER_ID = -1;
 
+    public static final boolean DEBUG = false;
+    public static final double DEBUG_PRICE_OFFSET = 1.0;
+
     public class Input {
         private final static double CASH_WIN = 10.00;
         private final static int NUM_SHARES = 1;
@@ -30,6 +33,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         private final static String SYMBOL="t"; // AT&T
         private final static double TRANSACTION_COST = 1.50;
         private final static int TWS_PORT = 7496;
+        private final static boolean IS_MARKET = false;
 
         /* Input parameters */
         public String account = null;
@@ -40,6 +44,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         public String symbol = SYMBOL;
         public double transactionCost = TRANSACTION_COST;
         public int twsPort = TWS_PORT;
+        public boolean isMarket = IS_MARKET;
     }
     public Input input = new Input();
 
@@ -49,8 +54,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         Double lastPrice = null;
         boolean isComplete(){
             return
-                bidPrice!=null &&
-                askPrice!=null &&
+//                bidPrice!=null &&
+//                askPrice!=null &&
                 lastPrice!=null;
         }
     }
@@ -242,7 +247,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             log.info("Account:          {}", input.account);
             log.info("Direction:        {}", input.isShort ? "Short" : "Long");
             log.info("Symbol:           {}", input.symbol);
-            log.info("Casgh Win:        {}", input.cashWin);
+            log.info("Cash Win:         {}", input.cashWin);
             log.info("Shares:           {}", input.numShares);
             log.info("Risk Currency:    {}", input.riskCurrency);
             log.info("Transaction Cost: {}", input.transactionCost);
@@ -303,10 +308,17 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     market.askPrice,
                     market.lastPrice));
 
+                if (input.isShort)
+                    throw new UnsupportedOperationException("shorts not working yet");
+
                 // In
-                os.in.orderType = OrderType.LMT;
+                if (input.isMarket)
+                    os.in.orderType = OrderType.MKT;
+                else
+                    os.in.orderType = OrderType.LMT;
                 os.in.name = "inn";
                 os.in.price = market.lastPrice;
+                if (DEBUG) os.in.price -= DEBUG_PRICE_OFFSET;
                 os.in.shares = (int) (input.riskCurrency / market.lastPrice);
                 os.in.fee = Math.max(1.0,0.005* os.in.shares);
 
@@ -317,6 +329,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 os.out.price = Math.ceil( 100* (
                     (os.in.price* os.in.shares+2* os.in.fee+input.cashWin)/ os.out.shares)
                 )/100;
+                if (DEBUG) os.out.price -= DEBUG_PRICE_OFFSET;
                 os.out.fee = Math.max(1.0,0.005* os.out.shares);
 
                 // Stop
@@ -324,6 +337,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 os.stop.orderType = OrderType.STP;
                 os.stop.shares = os.in.shares;
                 os.stop.price = os.in.price - (os.out.price- os.in.price)*2;
+                if (DEBUG) os.stop.price -= DEBUG_PRICE_OFFSET;
                 os.stop.fee = Math.max(1.0,0.005* os.stop.shares);
 
                 // Aggregate
@@ -352,7 +366,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
-                    o.order.m_transmit = false;                     // TODO: DEBUG
+//                    if (DEBUG)
+//                        o.order.m_transmit = false;
                 }
                 for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
                     o.order.m_ocaGroup = oca;
@@ -384,6 +399,12 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 ibServer.placeOrder( os.out.order.m_orderId, os.contract, os.out.order );
                 ibServer.placeOrder( os.stop.order.m_orderId, os.contract, os.stop.order );
 
+            }
+        });
+        WAIT_FOR_ORDERS_RECEIVED_LOOP.whenEnter(new StateHandler<Divden>() {
+            @Override
+            public void call(State<Divden> state, Divden context) throws Exception {
+                logOutState(state,"");
             }
         });
         WAIT_FOR_ORDERS_RECEIVED.whenEnter(new StateHandler<Divden>() {
@@ -571,6 +592,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             case TickType.BID: market.bidPrice = price; break;
             case TickType.ASK: market.askPrice = price; break;
             case TickType.LAST: market.lastPrice = price; break;
+            case TickType.LAST_RTH_TRADE: market.lastPrice = price; break;
             default: newData = false;
         }
         if (newData && market.isComplete()){

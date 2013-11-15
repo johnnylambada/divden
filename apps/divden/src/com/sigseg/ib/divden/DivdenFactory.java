@@ -18,6 +18,7 @@ public class DivdenFactory {
         "--long (default)\n"+
         "-s symbol\n"+
         "-r riskCurrency\n"+
+        "-m (create a market order)\n"+
         "-n numShares\n"+
         "-c cashWin\n"+
         "-v (verbose)\n"+
@@ -59,6 +60,8 @@ public class DivdenFactory {
                 try { divden.input.cashWin = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
+            } else if ("-m".equals(arg)){
+                divden.input.isMarket = true;
             } else if ("-n".equals(arg)){
                 try { divden.input.numShares = Integer.parseInt(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
