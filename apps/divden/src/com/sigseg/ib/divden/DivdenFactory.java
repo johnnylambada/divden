@@ -23,6 +23,7 @@ public class DivdenFactory {
         "-c cashWin\n"+
         "-v (verbose)\n"+
         "-t (transmit)\n"+
+        "-w (what-if)\n"+
         "-x transactionCost\n\n";
 
     private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
@@ -88,6 +89,8 @@ public class DivdenFactory {
                 try { divden.input.transactionCost = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
+            } else if ("-w".equals(arg)){
+                divden.input.isWhatIf = true;
             } else if ("-v".equals(arg)){
                 // This is taken care of in Main
             } else {

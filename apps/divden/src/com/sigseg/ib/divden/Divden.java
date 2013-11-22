@@ -46,6 +46,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         public double transactionCost = TRANSACTION_COST;
         public int twsPort = TWS_PORT;
         public boolean isMarket = IS_MARKET;
+        public boolean isWhatIf = false;
     }
     public Input input = new Input();
 
@@ -389,6 +390,9 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 
                 os.report();
 
+                if (input.isWhatIf)
+                    System.exit(0);
+
                 // This has to happen before the orders are actually placed because the
                 // async "Submitted" can happen at any time and if we're not in the right
                 // state, we'll lose them
@@ -416,7 +420,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     logOutState(state,"order: "+os.newOrderStatus.name);
                     if (
                         os.in.ordStatus!=null
-// TODO: Uncomment these when all the orders are submitted in ISSUING_ORDERS
                         && os.out.ordStatus!=null
                         && os.stop.ordStatus!=null
                     ) {
