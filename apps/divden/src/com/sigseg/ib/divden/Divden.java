@@ -371,7 +371,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
                     o.order.m_ocaGroup = oca;
                     o.order.m_ocaType = Types.OcaType.CancelWithBlocking.ordinal();
-                    o.order.m_parentId = os.in.order.m_orderId;
+//                    o.order.m_parentId = os.in.order.m_orderId;
                 }
 
                 os.in.order.m_lmtPrice = os.in.price;
