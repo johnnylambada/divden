@@ -41,6 +41,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         public int numShares = NUM_SHARES;
         public double riskCurrency = RISK_CURRENCY;
         public boolean isShort = false;
+        public boolean doTransmit = false;
         public String symbol = SYMBOL;
         public double transactionCost = TRANSACTION_COST;
         public int twsPort = TWS_PORT;
@@ -344,7 +345,6 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 os.movePercentToWin = 100.0*(os.out.price - os.in.price) / os.in.price;
                 os.movePercentToLose = 100.0*(os.stop.price - os.in.price) / os.in.price;
 
-
                 onPositionCalculated.trigger(context);
             }
         });
@@ -366,8 +366,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
-//                    if (DEBUG)
-//                        o.order.m_transmit = false;
+                    o.order.m_transmit = input.doTransmit;
                 }
                 for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
                     o.order.m_ocaGroup = oca;

@@ -22,6 +22,7 @@ public class DivdenFactory {
         "-n numShares\n"+
         "-c cashWin\n"+
         "-v (verbose)\n"+
+        "-t (transmit)\n"+
         "-x transactionCost\n\n";
 
     private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
@@ -81,6 +82,8 @@ public class DivdenFactory {
                 divden.input.isShort = true;
             } else if ("--long".equals(arg)){
                 divden.input.isShort = false;
+            } else if ("-t".equals(arg)){
+                divden.input.doTransmit = true;
             } else if ("-x".equals(arg)){
                 try { divden.input.transactionCost = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
