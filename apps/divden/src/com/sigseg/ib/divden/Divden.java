@@ -555,6 +555,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             try {
                 orderStatus = OrderStatus.valueOf(status);
                 switch (orderStatus){
+                    case Filled:
                     case Submitted:
                     case PreSubmitted:
                         BrokerOrder bo = os.findBrokerOrderByOrderId(orderId);
