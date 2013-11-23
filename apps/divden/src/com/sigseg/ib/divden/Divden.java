@@ -41,12 +41,14 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         public int numShares = NUM_SHARES;
         public double riskCurrency = RISK_CURRENCY;
         public boolean isShort = false;
+		public int verbose = 0;
         public boolean doTransmit = false;
         public String symbol = SYMBOL;
         public double transactionCost = TRANSACTION_COST;
         public int twsPort = TWS_PORT;
         public boolean isMarket = IS_MARKET;
         public boolean isWhatIf = false;
+		public double whatIfPrice = -1.0;
     }
     public Input input = new Input();
 
@@ -171,6 +173,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
     private final Event<Divden> onConnected = FlowBuilder.event("onConnected");
     private final Event<Divden> onConnectFailed = FlowBuilder.event("onConnectFailed");
     private final Event<Divden> onMarketDataRequested = FlowBuilder.event("onMarketDataRequested");
+	private final Event<Divden> onSkippingMarketDataRequest = FlowBuilder.event("onSkippingMarketDataRequest");
     private final Event<Divden> onMarketData = FlowBuilder.event("onMarketData");
     private final Event<Divden> onPositionCalculated = FlowBuilder.event("onPositionCalculated");
     private final Event<Divden> onOrdersIssued = FlowBuilder.event("onOrdersIssued");
@@ -198,7 +201,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             onConnectFailed.to(ERROR)
         );
         FlowBuilder.from(REQUESTING_MARKET_DATA).transit(
-            onMarketDataRequested.to(WAITING_FOR_MARKET_DATA)
+            onMarketDataRequested.to(WAITING_FOR_MARKET_DATA),
+			onSkippingMarketDataRequest.to(CALCULATING_POSITION)
         );
         FlowBuilder.from(WAITING_FOR_MARKET_DATA).transit(
             onMarketData.ignoreOutOfState().to(CALCULATING_POSITION)
@@ -239,7 +243,8 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override public void execute(Runnable runnable) { runnable.run(); }
         });
 
-//        flow.trace();
+		if (input.verbose>1)
+	        flow.trace();
     }
 
     private void bindFlow() {
@@ -260,39 +265,50 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
-                ibServer.eConnect("localhost", input.twsPort, 0);
-                if (ibServer.isConnected()){
-                    ibServer.reqAccountSummary(1, "All", "BuyingPower");
-                    onConnected.trigger(context);
-                } else {
-                    onConnectFailed.trigger(context);
-                }
+				if (input.isWhatIf){
+					// Don't really connect
+					onConnected.trigger(context);
+				} else {
+					ibServer.eConnect("localhost", input.twsPort, 0);
+					if (ibServer.isConnected()){
+						ibServer.reqAccountSummary(1, "All", "BuyingPower");
+						onConnected.trigger(context);
+					} else {
+						onConnectFailed.trigger(context);
+					}
+				}
             }
         });
         REQUESTING_MARKET_DATA.whenEnter(new StateHandler<Divden>() {
             @Override
             public void call(State<Divden> state, Divden context) throws Exception {
                 logOutState(state,"");
-                Contract c = os.contract;
+				Contract c = os.contract;
 
-                String[] symbolParts = input.symbol.split(":");
-                c.m_symbol = symbolParts[0].toUpperCase();
-                if (symbolParts.length>1)
-                    c.m_expiry = symbolParts[1];
+				String[] symbolParts = input.symbol.split(":");
+				c.m_symbol = symbolParts[0].toUpperCase();
+				if (symbolParts.length>1)
+					c.m_expiry = symbolParts[1];
 
-                try {
-                    Symbol s = Symbol.valueOf(c.m_symbol);
-                    c.m_secType = s.securityType.name();
-                    c.m_exchange = s.exchange.name();
-                    c.m_currency = s.currency.name();
-                } catch (IllegalArgumentException e){
-                    c.m_secType = SecurityType.STK.name();
-                    c.m_exchange = Exchange.SMART.name();
-                    c.m_currency = Currency.USD.name();
-                }
+				try {
+					Symbol s = Symbol.valueOf(c.m_symbol);
+					c.m_secType = s.securityType.name();
+					c.m_exchange = s.exchange.name();
+					c.m_currency = s.currency.name();
+				} catch (IllegalArgumentException e){
+					c.m_secType = SecurityType.STK.name();
+					c.m_exchange = Exchange.SMART.name();
+					c.m_currency = Currency.USD.name();
+				}
 
-                ibServer.reqMktData(os.nextValidOrderId++, os.contract, JavaClient.GENERIC_TICKS, false);
-                onMarketDataRequested.trigger(context);
+				if (!input.isWhatIf){
+					ibServer.reqMktData(os.nextValidOrderId++, os.contract, JavaClient.GENERIC_TICKS, false);
+	                onMarketDataRequested.trigger(context);
+				} else {
+					os.nextValidOrderId++;
+					market.lastPrice = input.whatIfPrice;
+					onSkippingMarketDataRequest.trigger(context);
+				}
 
                 // DEBUG
                 /*
@@ -372,7 +388,9 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
                     o.order.m_ocaGroup = oca;
                     o.order.m_ocaType = Types.OcaType.CancelWithBlocking.ordinal();
-//                    o.order.m_parentId = os.in.order.m_orderId;
+					// Don't do the following, it causes the brackets to cancel upon
+					// fill by the parent
+//                  o.order.m_parentId = os.in.order.m_orderId;
                 }
 
                 os.in.order.m_lmtPrice = os.in.price;

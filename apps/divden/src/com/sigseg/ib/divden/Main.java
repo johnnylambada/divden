@@ -1,12 +1,7 @@
 package com.sigseg.ib.divden;
 
-import au.com.ds.ef.EasyFlow;
-import com.ib.client.*;
 import org.slf4j.LoggerFactory;
 import org.slf4j.impl.SimpleLogger;
-
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * Divden implements the divden approach
@@ -19,12 +14,11 @@ public class Main {
             String arg = args[i];
             if ("-v".equals(arg)){
                 System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "trace");
+				break;
             }
         }
-        Divden divden;
         try {
-            divden = DivdenFactory.make(args,System.getenv());
-            divden.start();
+			DivdenFactory.make(args, System.getenv()).start();
         } catch (Exception e){
             LoggerFactory.getLogger(Main.class).error(e.getMessage());
         }

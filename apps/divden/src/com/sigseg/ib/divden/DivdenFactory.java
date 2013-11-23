@@ -21,9 +21,9 @@ public class DivdenFactory {
         "-m (create a market order)\n"+
         "-n numShares\n"+
         "-c cashWin\n"+
-        "-v (verbose)\n"+
+        "-v (verbose - more -v's for more verbosity)\n"+
         "-t (transmit)\n"+
-        "-w (what-if)\n"+
+        "-w whatIfPrice\n"+
         "-x transactionCost\n\n";
 
     private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
@@ -91,8 +91,11 @@ public class DivdenFactory {
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-w".equals(arg)){
                 divden.input.isWhatIf = true;
+				try { divden.input.whatIfPrice = Double.parseDouble(args[++i]);}
+				catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
+				catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-v".equals(arg)){
-                // This is taken care of in Main
+				divden.input.verbose++;
             } else {
                 throw new DivdenFactoryException("Invalid parameter " + arg);
             }
