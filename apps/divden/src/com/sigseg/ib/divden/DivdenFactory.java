@@ -1,6 +1,5 @@
 package com.sigseg.ib.divden;
 
-import au.com.ds.ef.EasyFlow;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
@@ -18,12 +17,13 @@ public class DivdenFactory {
         "--long (default)\n"+
         "-s symbol\n"+
         "-r riskCurrency\n"+
+		"-i inPrice (default to lastPrice)"+
         "-m (create a market order)\n"+
         "-n numShares\n"+
         "-c cashWin\n"+
         "-v (verbose - more -v's for more verbosity)\n"+
         "-t (transmit)\n"+
-        "-w whatIfPrice\n"+
+        "-w (whatif? -- needs in price)\n"+
         "-x transactionCost\n\n";
 
     private static String ENV_IB_ACCOUNT = "IB_ACCOUNT";
@@ -62,6 +62,10 @@ public class DivdenFactory {
                 try { divden.input.cashWin = Double.parseDouble(args[++i]);}
                 catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
                 catch (NumberFormatException e ){badParameter(arg);}
+			} else if ("-i".equals(arg)){
+				try { divden.input.inPrice = Double.parseDouble(args[++i]);}
+				catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
+				catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-m".equals(arg)){
                 divden.input.isMarket = true;
             } else if ("-n".equals(arg)){
@@ -91,9 +95,6 @@ public class DivdenFactory {
                 catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-w".equals(arg)){
                 divden.input.isWhatIf = true;
-				try { divden.input.whatIfPrice = Double.parseDouble(args[++i]);}
-				catch (ArrayIndexOutOfBoundsException e ){noParameter(arg);}
-				catch (NumberFormatException e ){badParameter(arg);}
             } else if ("-v".equals(arg)){
 				divden.input.verbose++;
             } else {

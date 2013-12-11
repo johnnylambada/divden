@@ -48,7 +48,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
         public int twsPort = TWS_PORT;
         public boolean isMarket = IS_MARKET;
         public boolean isWhatIf = false;
-		public double whatIfPrice = -1.0;
+		public double inPrice = Double.NaN;
     }
     public Input input = new Input();
 
@@ -258,6 +258,7 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
             log.info("Shares:           {}", input.numShares);
             log.info("Risk Currency:    {}", input.riskCurrency);
             log.info("Transaction Cost: {}", input.transactionCost);
+			log.info("In Price:         {}", input.inPrice);
             onReportShown.trigger(context);
             }
         });
@@ -301,13 +302,15 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
 					c.m_currency = Currency.USD.name();
 				}
 
-				if (!input.isWhatIf){
-					ibServer.reqMktData(os.nextValidOrderId++, os.contract, JavaClient.GENERIC_TICKS, false);
-	                onMarketDataRequested.trigger(context);
-				} else {
+				if (input.isWhatIf){
 					os.nextValidOrderId++;
-					market.lastPrice = input.whatIfPrice;
+					if (Double.isNaN(input.inPrice))
+						throw new DivdenException("-w (whatif) requires -i (inPrice)");
+					market.lastPrice = input.inPrice;
 					onSkippingMarketDataRequest.trigger(context);
+				} else {
+					ibServer.reqMktData(os.nextValidOrderId++, os.contract, JavaClient.GENERIC_TICKS, false);
+					onMarketDataRequested.trigger(context);
 				}
 
                 // DEBUG
@@ -335,7 +338,10 @@ public class Divden extends StatefulContext implements EWrapper,Constants {
                 else
                     os.in.orderType = OrderType.LMT;
                 os.in.name = "inn";
-                os.in.price = market.lastPrice;
+				if (Double.isNaN(input.inPrice))
+					os.in.price = market.lastPrice;
+				else
+					os.in.price = input.inPrice;
                 if (DEBUG) os.in.price -= DEBUG_PRICE_OFFSET;
                 os.in.shares = (int) (input.riskCurrency / market.lastPrice);
                 os.in.fee = Math.max(1.0,0.005* os.in.shares);
