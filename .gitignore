@@ -1,7 +1,5 @@
 .hmm
-*.iml
 tools/out/
-tools/.idea/
 external/tws/IBJts/log*
 external/tws/IBJts/jts.ini
 /sources/

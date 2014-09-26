@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="balance:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/balance_jar</output-path>
+    <root id="archive" name="balance.jar">
+      <element id="module-output" name="balance" />
+      <element id="module-output" name="javaclient" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../apps/balance/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
