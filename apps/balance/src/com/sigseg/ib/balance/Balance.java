@@ -25,7 +25,9 @@ public class Balance implements EWrapper {
 	private void run() {
 		ib.eConnect("localhost", 7496, 0);
 
-        ib.reqAccountSummary(1, "All", "BuyingPower");
+        // https://www.interactivebrokers.com/en/software/api/apiguide/java/reqaccountsummary.htm
+        ib.reqAccountSummary(1, "All", "NetLiquidation");
+//        ib.reqAccountSummary(1, "All", "BuyingPower");
 //        try {
 //            Thread.sleep(1000);
 //        } catch (InterruptedException e) {
