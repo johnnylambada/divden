@@ -83,7 +83,7 @@ function bes
   java -jar $(gettop)/tools/out/artifacts/bracket_jar/bracket.jar $*
   )
 }
-echo 'divden@divden' >> $T/.hmm
+echo 'bes@create a bracket around ES' >> $T/.hmm
 
 has-account ()
 {
