@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="bracket:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/bracket_jar</output-path>
+    <root id="archive" name="bracket.jar">
+      <element id="module-output" name="bracket" />
+      <element id="module-output" name="javaclient" />
+    </root>
+  </artifact>
+</component>

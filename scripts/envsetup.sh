@@ -77,6 +77,14 @@ function divden
 }
 echo 'divden@divden' >> $T/.hmm
 
+function bes
+{
+  (
+  java -jar $(gettop)/tools/out/artifacts/bracket_jar/bracket.jar $*
+  )
+}
+echo 'divden@divden' >> $T/.hmm
+
 has-account ()
 {
     if [ -n "$IB_ACCOUNT" ]; then
