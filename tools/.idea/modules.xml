@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/EasyFlow.iml" filepath="$PROJECT_DIR$/EasyFlow.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestJavaClient/TestJavaClient.iml" filepath="$PROJECT_DIR$/TestJavaClient/TestJavaClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/../apps/balance/balance.iml" filepath="$PROJECT_DIR$/../apps/balance/balance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../apps/br/br.iml" filepath="$PROJECT_DIR$/../apps/br/br.iml" />
       <module fileurl="file://$PROJECT_DIR$/../apps/bracket/bracket.iml" filepath="$PROJECT_DIR$/../apps/bracket/bracket.iml" />
       <module fileurl="file://$PROJECT_DIR$/../apps/divden/divden.iml" filepath="$PROJECT_DIR$/../apps/divden/divden.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaclient.iml" filepath="$PROJECT_DIR$/javaclient.iml" />

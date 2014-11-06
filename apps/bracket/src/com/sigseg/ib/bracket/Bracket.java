@@ -13,9 +13,14 @@ import com.ib.client.UnderComp;
 import java.util.Locale;
 
 /**
- * bracnet just displays the bracnet of the account
+ * bracket create a bracket order
+ *
  */
+
 public class Bracket implements EWrapper {
+
+
+
 	EClientSocket ib = new EClientSocket(this);
 	
 	public static void main(String[] args) {

@@ -77,6 +77,22 @@ function divden
 }
 echo 'divden@divden' >> $T/.hmm
 
+function br
+{
+  (
+  java -jar $(gettop)/tools/out/artifacts/br_jar/br.jar $*
+  )
+}
+echo 'br@bracket -- you must transmit' >> $T/.hmm
+
+function brt
+{
+  (
+  java -jar $(gettop)/tools/out/artifacts/br_jar/br.jar -t$*
+  )
+}
+echo 'brt@bracket -- transmitted' >> $T/.hmm
+
 function bes
 {
   (

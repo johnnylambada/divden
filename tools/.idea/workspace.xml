@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="bracket:jar" />
+      <artifact name="br:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
@@ -181,26 +181,157 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties converted="true" />
     <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="tools" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Bracket.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.021505376" vertical-offset="0" max-vertical-offset="768">
-              <caret line="1" column="27" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="Br.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="7644">
+                  <caret line="348" column="53" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
+                    <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
+                    <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
+                    <element signature="method#initFlow#0;class#Br#0" expanded="true" />
+                    <element signature="method#execute#0;class#9372:9475" expanded="true" />
+                    <element signature="method#call#0;class#9599:10103" expanded="true" />
+                    <element signature="method#call#0;class#10139:10674" expanded="true" />
+                    <element signature="method#call#0;class#10722:12175" expanded="true" />
+                    <element signature="method#call#0;class#13995:17142" expanded="true" />
+                    <element signature="method#call#0;class#17429:18245" expanded="true" />
+                    <element signature="method#call#0;class#18297:18553" expanded="true" />
+                    <element signature="method#call#0;class#18596:18830" expanded="true" />
+                    <element signature="method#call#0;class#18881:19109" expanded="true" />
+                    <element signature="method#call#0;class#19151:19384" expanded="true" />
+                    <element signature="method#call#0;class#19427:19661" expanded="true" />
+                    <element signature="method#call#0;class#19918:20149" expanded="true" />
+                    <element signature="method#logOutState#0;class#Br#0" expanded="true" />
+                    <element signature="method#logOutState#1;class#Br#0" expanded="true" />
+                    <element signature="method#logErrState#0;class#Br#0" expanded="true" />
+                    <element signature="method#logErrState#1;class#Br#0" expanded="true" />
+                    <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
+                    <element signature="method#Br#0;class#Br#0" expanded="true" />
+                    <element signature="method#validate#0;class#Br#0" expanded="true" />
+                    <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
+                    <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
+                    <element signature="method#error#2;class#Br#0" expanded="true" />
+                    <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
+                    <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
+                    <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Types.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/Types.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="2424">
+                  <caret line="179" column="32" selection-start-line="179" selection-start-column="14" selection-end-line="179" selection-end-column="32" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Bracket.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.17088607" vertical-offset="0" max-vertical-offset="996">
+                  <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+                  <folding>
+                    <element signature="method#run#0;class#Bracket#0" expanded="true" />
+                    <element signature="method#accountSummary#0;class#Bracket#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Contract.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/client/Contract.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+                  <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="BrFactory.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
+                  <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="Br.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.54113925" vertical-offset="4302" max-vertical-offset="7644">
+                  <caret line="387" column="16" selection-start-line="387" selection-start-column="16" selection-end-line="387" selection-end-column="16" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
+                    <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
+                    <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+                    <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
+                    <element signature="method#initFlow#0;class#Br#0" expanded="true" />
+                    <element signature="method#execute#0;class#9372:9475" expanded="true" />
+                    <element signature="method#call#0;class#9599:10103" expanded="true" />
+                    <element signature="method#call#0;class#10139:10674" expanded="true" />
+                    <element signature="method#call#0;class#10722:12175" expanded="true" />
+                    <element signature="method#call#0;class#12221:13955" expanded="true" />
+                    <element signature="method#call#0;class#17429:18245" expanded="true" />
+                    <element signature="method#call#0;class#18297:18553" expanded="true" />
+                    <element signature="method#call#0;class#18596:18830" expanded="true" />
+                    <element signature="method#call#0;class#18881:19109" expanded="true" />
+                    <element signature="method#call#0;class#19151:19384" expanded="true" />
+                    <element signature="method#call#0;class#19427:19661" expanded="true" />
+                    <element signature="method#call#0;class#19918:20149" expanded="true" />
+                    <element signature="method#logOutState#0;class#Br#0" expanded="true" />
+                    <element signature="method#logOutState#1;class#Br#0" expanded="true" />
+                    <element signature="method#logErrState#0;class#Br#0" expanded="true" />
+                    <element signature="method#logErrState#1;class#Br#0" expanded="true" />
+                    <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
+                    <element signature="method#Br#0;class#Br#0" expanded="true" />
+                    <element signature="method#validate#0;class#Br#0" expanded="true" />
+                    <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
+                    <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
+                    <element signature="method#error#2;class#Br#0" expanded="true" />
+                    <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
+                    <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
+                    <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -233,15 +364,18 @@
         <option value="$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/DivdenFactory.java" />
         <option value="$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Divden.java" />
         <option value="$PROJECT_DIR$/../apps/balance/src/com/sigseg/ib/balance/Balance.java" />
+        <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java" />
+        <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Constants.java" />
+        <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java" />
         <option value="$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1752" />
-    <option name="y" value="-181" />
-    <option name="width" value="1440" />
-    <option name="height" value="874" />
+    <option name="x" value="-1920" />
+    <option name="y" value="-278" />
+    <option name="width" value="1882" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -360,6 +494,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -374,6 +509,106 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javaclient" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javaclient" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ib" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javaclient" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ib" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javaclient" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ib" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ef" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bracket" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -407,12 +642,53 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bracket" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="br" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="br" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="br" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="br" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -424,7 +700,7 @@
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.sourceCode.Java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../apps/bracket/bracket.iml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../apps/br/src/META-INF" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -442,7 +718,7 @@
       <recent name="com.sigseg.ib.divden" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Bracket">
+  <component name="RunManager" selected="Application.Br">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -481,41 +757,6 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -542,6 +783,41 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -725,17 +1001,49 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="bracket" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="6">
+    <configuration default="false" name="Br" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="com.sigseg.ib.br.Main" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../apps/br" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="br" />
+      <envs>
+        <env name="IB_ACCOUNT" value="U824752" />
+      </envs>
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="7">
       <item index="0" class="java.lang.String" itemvalue="Application.TestJavaClient" />
       <item index="1" class="java.lang.String" itemvalue="Application.apidemo" />
       <item index="2" class="java.lang.String" itemvalue="Application.Test" />
       <item index="3" class="java.lang.String" itemvalue="Application.Balance" />
       <item index="4" class="java.lang.String" itemvalue="Application.Divden" />
       <item index="5" class="java.lang.String" itemvalue="Application.Bracket" />
+      <item index="6" class="java.lang.String" itemvalue="Application.Br" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -759,44 +1067,45 @@
       <workItem from="1411771453973" duration="96000" />
       <workItem from="1411776770249" duration="2936000" />
       <workItem from="1411921022487" duration="146000" />
-      <workItem from="1414525097052" duration="1366000" />
+      <workItem from="1414525097052" duration="6562000" />
+      <workItem from="1415228267640" duration="5520000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4544000" />
+    <option name="totallyTimeSpent" value="15260000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1752" y="-181" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <frame x="-1920" y="-278" width="1882" height="1053" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631016" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30555555" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30481285" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32189974" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32085562" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26752505" sideWeight="0.6933798" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20767196" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11467391" sideWeight="0.6933798" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2802139" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32576618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -885,11 +1194,47 @@
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>276</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>538</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>556</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>565</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>571</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
+          <line>614</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="11" />
+      <option name="time" value="17" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -897,51 +1242,56 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/OrderStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/client/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3276" max-vertical-offset="3936">
-          <caret line="273" column="60" selection-start-line="273" selection-start-column="60" selection-end-line="273" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/samples/Java/TestJavaClient/OrderDlg.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5412" max-vertical-offset="6156">
-          <caret line="451" column="13" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/samples/Java/TestJavaClient/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="504">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/samples/Java/TestJavaClient/SampleFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6816" max-vertical-offset="13968">
-          <caret line="568" column="12" selection-start-line="568" selection-start-column="12" selection-end-line="568" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Divden.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7740">
           <caret line="260" column="58" selection-start-line="260" selection-start-column="58" selection-end-line="260" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isComplete#0;class#Market#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#BrokerOrder#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#initFlow#0;class#Divden#0" expanded="true" />
+            <element signature="method#execute#0;class#9981:10084" expanded="true" />
+            <element signature="method#call#0;class#10208:10919" expanded="true" />
+            <element signature="method#call#0;class#10955:11502" expanded="true" />
+            <element signature="method#call#0;class#12969:15075" expanded="true" />
+            <element signature="method#call#0;class#15115:17701" expanded="true" />
+            <element signature="e#17886#17887#0" expanded="true" />
+            <element signature="e#17939#17940#0" expanded="true" />
+            <element signature="method#call#0;class#18000:18828" expanded="true" />
+            <element signature="method#call#0;class#18880:19148" expanded="true" />
+            <element signature="method#call#0;class#19191:19437" expanded="true" />
+            <element signature="method#call#0;class#19488:19728" expanded="true" />
+            <element signature="method#call#0;class#19770:20015" expanded="true" />
+            <element signature="method#call#0;class#20058:20304" expanded="true" />
+            <element signature="e#20465#20466#0" expanded="true" />
+            <element signature="e#20528#20529#0" expanded="true" />
+            <element signature="method#call#0;class#20573:20816" expanded="true" />
+            <element signature="method#logOutState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logOutState#1;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#1;class#Divden#0" expanded="true" />
+            <element signature="method#DivdenException#0;class#DivdenException#0;class#Divden#0" expanded="true" />
+            <element signature="method#Divden#0;class#Divden#0" expanded="true" />
+            <element signature="method#validate#0;class#Divden#0" expanded="true" />
+            <element signature="e#21638#21639#0" expanded="true" />
+            <element signature="e#21670#21671#0" expanded="true" />
+            <element signature="method#ocaGroup#0;class#Divden#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Divden#0" expanded="true" />
+            <element signature="e#22807#22808#0" expanded="true" />
+            <element signature="e#22865#22866#0" expanded="true" />
+            <element signature="e#22911#22912#0" expanded="true" />
+            <element signature="e#22941#22942#0" expanded="true" />
+            <element signature="method#error#2;class#Divden#0" expanded="true" />
+            <element signature="method#nextValidId#0;class#Divden#0" expanded="true" />
+            <element signature="method#orderStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#tickPrice#0;class#Divden#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -949,7 +1299,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="1500">
           <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,7 +1370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="504">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1037,7 +1385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="1500">
           <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1053,7 +1400,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1156" max-vertical-offset="3228">
           <caret line="260" column="58" selection-start-line="260" selection-start-column="58" selection-end-line="260" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isComplete#0;class#Market#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#BrokerOrder#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#initFlow#0;class#Divden#0" expanded="true" />
+            <element signature="method#execute#0;class#9981:10084" expanded="true" />
+            <element signature="method#call#0;class#10208:10919" expanded="true" />
+            <element signature="method#call#0;class#10955:11502" expanded="true" />
+            <element signature="method#call#0;class#12969:15075" expanded="true" />
+            <element signature="method#call#0;class#15115:17701" expanded="true" />
+            <element signature="e#17886#17887#0" expanded="true" />
+            <element signature="e#17939#17940#0" expanded="true" />
+            <element signature="method#call#0;class#18000:18828" expanded="true" />
+            <element signature="method#call#0;class#18880:19148" expanded="true" />
+            <element signature="method#call#0;class#19191:19437" expanded="true" />
+            <element signature="method#call#0;class#19488:19728" expanded="true" />
+            <element signature="method#call#0;class#19770:20015" expanded="true" />
+            <element signature="method#call#0;class#20058:20304" expanded="true" />
+            <element signature="e#20465#20466#0" expanded="true" />
+            <element signature="e#20528#20529#0" expanded="true" />
+            <element signature="method#call#0;class#20573:20816" expanded="true" />
+            <element signature="method#logOutState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logOutState#1;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#1;class#Divden#0" expanded="true" />
+            <element signature="method#DivdenException#0;class#DivdenException#0;class#Divden#0" expanded="true" />
+            <element signature="method#Divden#0;class#Divden#0" expanded="true" />
+            <element signature="method#validate#0;class#Divden#0" expanded="true" />
+            <element signature="e#21638#21639#0" expanded="true" />
+            <element signature="e#21670#21671#0" expanded="true" />
+            <element signature="method#ocaGroup#0;class#Divden#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Divden#0" expanded="true" />
+            <element signature="e#22807#22808#0" expanded="true" />
+            <element signature="e#22865#22866#0" expanded="true" />
+            <element signature="e#22911#22912#0" expanded="true" />
+            <element signature="e#22941#22942#0" expanded="true" />
+            <element signature="method#error#2;class#Divden#0" expanded="true" />
+            <element signature="method#nextValidId#0;class#Divden#0" expanded="true" />
+            <element signature="method#orderStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#tickPrice#0;class#Divden#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1085,7 +1477,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="504">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1101,7 +1492,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="1500">
           <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1117,7 +1507,52 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3120" max-vertical-offset="7740">
           <caret line="260" column="58" selection-start-line="260" selection-start-column="58" selection-end-line="260" selection-end-column="58" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isComplete#0;class#Market#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#BrokerOrder#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#initFlow#0;class#Divden#0" expanded="true" />
+            <element signature="method#execute#0;class#9981:10084" expanded="true" />
+            <element signature="method#call#0;class#10208:10919" expanded="true" />
+            <element signature="method#call#0;class#10955:11502" expanded="true" />
+            <element signature="method#call#0;class#12969:15075" expanded="true" />
+            <element signature="method#call#0;class#15115:17701" expanded="true" />
+            <element signature="e#17886#17887#0" expanded="true" />
+            <element signature="e#17939#17940#0" expanded="true" />
+            <element signature="method#call#0;class#18000:18828" expanded="true" />
+            <element signature="method#call#0;class#18880:19148" expanded="true" />
+            <element signature="method#call#0;class#19191:19437" expanded="true" />
+            <element signature="method#call#0;class#19488:19728" expanded="true" />
+            <element signature="method#call#0;class#19770:20015" expanded="true" />
+            <element signature="method#call#0;class#20058:20304" expanded="true" />
+            <element signature="e#20465#20466#0" expanded="true" />
+            <element signature="e#20528#20529#0" expanded="true" />
+            <element signature="method#call#0;class#20573:20816" expanded="true" />
+            <element signature="method#logOutState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logOutState#1;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#1;class#Divden#0" expanded="true" />
+            <element signature="method#DivdenException#0;class#DivdenException#0;class#Divden#0" expanded="true" />
+            <element signature="method#Divden#0;class#Divden#0" expanded="true" />
+            <element signature="method#validate#0;class#Divden#0" expanded="true" />
+            <element signature="e#21638#21639#0" expanded="true" />
+            <element signature="e#21670#21671#0" expanded="true" />
+            <element signature="method#ocaGroup#0;class#Divden#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Divden#0" expanded="true" />
+            <element signature="e#22807#22808#0" expanded="true" />
+            <element signature="e#22865#22866#0" expanded="true" />
+            <element signature="e#22911#22912#0" expanded="true" />
+            <element signature="e#22941#22942#0" expanded="true" />
+            <element signature="method#error#2;class#Divden#0" expanded="true" />
+            <element signature="method#nextValidId#0;class#Divden#0" expanded="true" />
+            <element signature="method#orderStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#tickPrice#0;class#Divden#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1149,7 +1584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="504">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1217,13 +1651,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/Types.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2161384" vertical-offset="0" max-vertical-offset="0">
-          <caret line="27" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/OrderStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
@@ -1252,7 +1679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="504">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1260,38 +1686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6816" max-vertical-offset="13968">
           <caret line="568" column="12" selection-start-line="568" selection-start-column="12" selection-end-line="568" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/DivdenFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="780" max-vertical-offset="1500">
-          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="588">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="372">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Divden.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="736" max-vertical-offset="3228">
-          <caret line="260" column="58" selection-start-line="260" selection-start-column="58" selection-end-line="260" selection-end-column="58" />
           <folding />
         </state>
       </provider>
@@ -1320,11 +1714,173 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34493193" vertical-offset="0" max-vertical-offset="661">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/DivdenFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1212">
+          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.036308624" vertical-offset="0" max-vertical-offset="661">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../external/EasyFlow/src/main/java/au/com/ds/ef/FlowBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.099585064" vertical-offset="0" max-vertical-offset="482">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/divden/src/com/sigseg/ib/divden/Divden.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.7222222" vertical-offset="4548" max-vertical-offset="7740">
+          <caret line="286" column="49" selection-start-line="286" selection-start-column="41" selection-end-line="286" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isComplete#0;class#Market#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#BrokerOrder#0;class#Divden#0" expanded="true" />
+            <element signature="method#report#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Divden#0" expanded="true" />
+            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#initFlow#0;class#Divden#0" expanded="true" />
+            <element signature="method#execute#0;class#9981:10084" expanded="true" />
+            <element signature="method#call#0;class#10208:10919" expanded="true" />
+            <element signature="method#call#0;class#10955:11502" expanded="true" />
+            <element signature="method#call#0;class#12969:15075" expanded="true" />
+            <element signature="method#call#0;class#15115:17701" expanded="true" />
+            <element signature="e#17886#17887#0" expanded="true" />
+            <element signature="e#17939#17940#0" expanded="true" />
+            <element signature="method#call#0;class#18000:18828" expanded="true" />
+            <element signature="method#call#0;class#18880:19148" expanded="true" />
+            <element signature="method#call#0;class#19191:19437" expanded="true" />
+            <element signature="method#call#0;class#19488:19728" expanded="true" />
+            <element signature="method#call#0;class#19770:20015" expanded="true" />
+            <element signature="method#call#0;class#20058:20304" expanded="true" />
+            <element signature="e#20465#20466#0" expanded="true" />
+            <element signature="e#20528#20529#0" expanded="true" />
+            <element signature="method#call#0;class#20573:20816" expanded="true" />
+            <element signature="method#logOutState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logOutState#1;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#0;class#Divden#0" expanded="true" />
+            <element signature="method#logErrState#1;class#Divden#0" expanded="true" />
+            <element signature="method#DivdenException#0;class#DivdenException#0;class#Divden#0" expanded="true" />
+            <element signature="method#Divden#0;class#Divden#0" expanded="true" />
+            <element signature="method#validate#0;class#Divden#0" expanded="true" />
+            <element signature="e#21638#21639#0" expanded="true" />
+            <element signature="e#21670#21671#0" expanded="true" />
+            <element signature="method#ocaGroup#0;class#Divden#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Divden#0" expanded="true" />
+            <element signature="e#22807#22808#0" expanded="true" />
+            <element signature="e#22865#22866#0" expanded="true" />
+            <element signature="e#22911#22912#0" expanded="true" />
+            <element signature="e#22941#22942#0" expanded="true" />
+            <element signature="method#error#2;class#Divden#0" expanded="true" />
+            <element signature="method#nextValidId#0;class#Divden#0" expanded="true" />
+            <element signature="method#orderStatus#0;class#Divden#0" expanded="true" />
+            <element signature="method#tickPrice#0;class#Divden#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59534883" vertical-offset="0" max-vertical-offset="645">
+          <caret line="32" column="43" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/client/Contract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/Types.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="2424">
+          <caret line="179" column="32" selection-start-line="179" selection-start-column="14" selection-end-line="179" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="7644">
+          <caret line="348" column="53" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
+            <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
+            <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
+            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
+            <element signature="method#initFlow#0;class#Br#0" expanded="true" />
+            <element signature="method#execute#0;class#9372:9475" expanded="true" />
+            <element signature="method#call#0;class#9599:10103" expanded="true" />
+            <element signature="method#call#0;class#10139:10674" expanded="true" />
+            <element signature="method#call#0;class#10722:12175" expanded="true" />
+            <element signature="method#call#0;class#13995:17142" expanded="true" />
+            <element signature="method#call#0;class#17429:18245" expanded="true" />
+            <element signature="method#call#0;class#18297:18553" expanded="true" />
+            <element signature="method#call#0;class#18596:18830" expanded="true" />
+            <element signature="method#call#0;class#18881:19109" expanded="true" />
+            <element signature="method#call#0;class#19151:19384" expanded="true" />
+            <element signature="method#call#0;class#19427:19661" expanded="true" />
+            <element signature="method#call#0;class#19918:20149" expanded="true" />
+            <element signature="method#logOutState#0;class#Br#0" expanded="true" />
+            <element signature="method#logOutState#1;class#Br#0" expanded="true" />
+            <element signature="method#logErrState#0;class#Br#0" expanded="true" />
+            <element signature="method#logErrState#1;class#Br#0" expanded="true" />
+            <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
+            <element signature="method#Br#0;class#Br#0" expanded="true" />
+            <element signature="method#validate#0;class#Br#0" expanded="true" />
+            <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
+            <element signature="method#error#2;class#Br#0" expanded="true" />
+            <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
+            <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
+            <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.021505376" vertical-offset="0" max-vertical-offset="768">
-          <caret line="1" column="27" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.17088607" vertical-offset="0" max-vertical-offset="996">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="method#run#0;class#Bracket#0" expanded="true" />
+            <element signature="method#accountSummary#0;class#Bracket#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="br:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/br_jar</output-path>
+    <root id="archive" name="br.jar">
+      <element id="module-output" name="br" />
+      <element id="module-output" name="javaclient" />
+      <element id="module-output" name="EasyFlow" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libs/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libs/slf4j-api-1.7.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libs/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../libs/slf4j-simple-1.7.5.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
