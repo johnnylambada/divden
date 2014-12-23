@@ -181,8 +181,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules converted="true" />
     <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -192,47 +192,12 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf>
-          <file leaf-file-name="Br.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="Br.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="7644">
-                  <caret line="348" column="53" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
-                    <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
-                    <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
-                    <element signature="method#initFlow#0;class#Br#0" expanded="true" />
-                    <element signature="method#execute#0;class#9372:9475" expanded="true" />
-                    <element signature="method#call#0;class#9599:10103" expanded="true" />
-                    <element signature="method#call#0;class#10139:10674" expanded="true" />
-                    <element signature="method#call#0;class#10722:12175" expanded="true" />
-                    <element signature="method#call#0;class#13995:17142" expanded="true" />
-                    <element signature="method#call#0;class#17429:18245" expanded="true" />
-                    <element signature="method#call#0;class#18297:18553" expanded="true" />
-                    <element signature="method#call#0;class#18596:18830" expanded="true" />
-                    <element signature="method#call#0;class#18881:19109" expanded="true" />
-                    <element signature="method#call#0;class#19151:19384" expanded="true" />
-                    <element signature="method#call#0;class#19427:19661" expanded="true" />
-                    <element signature="method#call#0;class#19918:20149" expanded="true" />
-                    <element signature="method#logOutState#0;class#Br#0" expanded="true" />
-                    <element signature="method#logOutState#1;class#Br#0" expanded="true" />
-                    <element signature="method#logErrState#0;class#Br#0" expanded="true" />
-                    <element signature="method#logErrState#1;class#Br#0" expanded="true" />
-                    <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
-                    <element signature="method#Br#0;class#Br#0" expanded="true" />
-                    <element signature="method#validate#0;class#Br#0" expanded="true" />
-                    <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
-                    <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
-                    <element signature="method#error#2;class#Br#0" expanded="true" />
-                    <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
-                    <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
-                    <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
-                  </folding>
+                <state vertical-scroll-proportion="1.1962733" vertical-offset="4209" max-vertical-offset="7836">
+                  <caret line="431" column="0" selection-start-line="431" selection-start-column="0" selection-end-line="431" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -240,22 +205,9 @@
           <file leaf-file-name="Types.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/controller/Types.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="2424">
+                <state vertical-scroll-proportion="0.0" vertical-offset="2148" max-vertical-offset="3984">
                   <caret line="179" column="32" selection-start-line="179" selection-start-column="14" selection-end-line="179" selection-end-column="32" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Bracket.java" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.17088607" vertical-offset="0" max-vertical-offset="996">
-                  <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-                  <folding>
-                    <element signature="method#run#0;class#Bracket#0" expanded="true" />
-                    <element signature="method#accountSummary#0;class#Bracket#0" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -263,7 +215,7 @@
           <file leaf-file-name="Contract.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../external/tws-api/source/javaclient/com/ib/client/Contract.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="624">
+                <state vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="1704">
                   <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
                   <folding />
                 </state>
@@ -273,8 +225,8 @@
           <file leaf-file-name="BrFactory.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
-                  <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="1392">
+                  <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
                   <folding />
                 </state>
               </provider>
@@ -284,46 +236,14 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Br.java" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="Br.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.54113925" vertical-offset="4302" max-vertical-offset="7644">
-                  <caret line="387" column="16" selection-start-line="387" selection-start-column="16" selection-end-line="387" selection-end-column="16" />
+                <state vertical-scroll-proportion="0.25341615" vertical-offset="0" max-vertical-offset="3948">
+                  <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
                   <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
-                    <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
-                    <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-                    <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
-                    <element signature="method#initFlow#0;class#Br#0" expanded="true" />
-                    <element signature="method#execute#0;class#9372:9475" expanded="true" />
-                    <element signature="method#call#0;class#9599:10103" expanded="true" />
-                    <element signature="method#call#0;class#10139:10674" expanded="true" />
-                    <element signature="method#call#0;class#10722:12175" expanded="true" />
-                    <element signature="method#call#0;class#12221:13955" expanded="true" />
-                    <element signature="method#call#0;class#17429:18245" expanded="true" />
-                    <element signature="method#call#0;class#18297:18553" expanded="true" />
-                    <element signature="method#call#0;class#18596:18830" expanded="true" />
-                    <element signature="method#call#0;class#18881:19109" expanded="true" />
-                    <element signature="method#call#0;class#19151:19384" expanded="true" />
-                    <element signature="method#call#0;class#19427:19661" expanded="true" />
-                    <element signature="method#call#0;class#19918:20149" expanded="true" />
-                    <element signature="method#logOutState#0;class#Br#0" expanded="true" />
-                    <element signature="method#logOutState#1;class#Br#0" expanded="true" />
-                    <element signature="method#logErrState#0;class#Br#0" expanded="true" />
-                    <element signature="method#logErrState#1;class#Br#0" expanded="true" />
-                    <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
-                    <element signature="method#Br#0;class#Br#0" expanded="true" />
-                    <element signature="method#validate#0;class#Br#0" expanded="true" />
-                    <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
-                    <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
-                    <element signature="method#error#2;class#Br#0" expanded="true" />
-                    <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
-                    <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
-                    <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
+                    <element signature="method#bindFlow#0;class#Br#0" expanded="true" />
+                    <element signature="method#call#0;class#14074:17552" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -366,16 +286,16 @@
         <option value="$PROJECT_DIR$/../apps/balance/src/com/sigseg/ib/balance/Balance.java" />
         <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java" />
         <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Constants.java" />
-        <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java" />
         <option value="$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java" />
+        <option value="$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
-    <option name="y" value="-278" />
-    <option name="width" value="1882" />
-    <option name="height" value="1053" />
+    <option name="x" value="19" />
+    <option name="y" value="43" />
+    <option name="width" value="1799" />
+    <option name="height" value="962" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -493,8 +413,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -689,6 +607,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -757,6 +677,41 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -783,41 +738,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1068,15 +988,18 @@
       <workItem from="1411776770249" duration="2936000" />
       <workItem from="1411921022487" duration="146000" />
       <workItem from="1414525097052" duration="6562000" />
-      <workItem from="1415228267640" duration="5520000" />
+      <workItem from="1415228267640" duration="7210000" />
+      <workItem from="1415340782930" duration="3238000" />
+      <workItem from="1418430227881" duration="77000" />
+      <workItem from="1419356105571" duration="59000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15260000" />
+    <option name="totallyTimeSpent" value="20324000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="-278" width="1882" height="1053" extended-state="0" />
+    <frame x="19" y="43" width="1799" height="962" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1084,7 +1007,6 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2631016" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30481285" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1093,19 +1015,20 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32085562" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11467391" sideWeight="0.6933798" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2802139" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.042117245" sideWeight="0.6933798" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27920792" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3152318" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32085562" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1202,31 +1125,31 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
-          <line>538</line>
+          <line>544</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
-          <line>556</line>
+          <line>562</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
-          <line>565</line>
+          <line>571</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
-          <line>571</line>
+          <line>577</line>
           <properties />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java</url>
-          <line>614</line>
+          <line>620</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -1306,7 +1229,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="384">
           <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1314,7 +1236,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="348" max-vertical-offset="588">
           <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1335,10 +1256,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="26304" max-vertical-offset="28128">
           <caret line="2192" column="46" selection-start-line="2192" selection-start-column="29" selection-end-line="2192" selection-end-column="46" />
-          <folding>
-            <element signature="method#reqAccountSummary#0;class#EClientSocket#0" expanded="true" />
-            <element signature="e#79250#79251#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1346,7 +1263,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1362,7 +1278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5412" max-vertical-offset="6156">
           <caret line="451" column="13" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,7 +1307,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="384">
           <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1453,7 +1367,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1469,7 +1382,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5412" max-vertical-offset="6156">
           <caret line="451" column="13" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1499,7 +1411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="372">
           <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1560,7 +1471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="348">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1576,7 +1486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5412" max-vertical-offset="6156">
           <caret line="451" column="13" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1655,7 +1564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1671,7 +1579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5412" max-vertical-offset="6156">
           <caret line="451" column="13" selection-start-line="451" selection-start-column="13" selection-end-line="451" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1694,10 +1601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8016529" vertical-offset="3932" max-vertical-offset="4416">
           <caret line="2336" column="0" selection-start-line="2336" selection-start-column="0" selection-end-line="2336" selection-end-column="0" />
-          <folding>
-            <element signature="method#reqAccountSummary#0;class#EClientSocket#0" expanded="true" />
-            <element signature="e#79250#79251#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1718,7 +1621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34493193" vertical-offset="0" max-vertical-offset="661">
           <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1733,7 +1635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.036308624" vertical-offset="0" max-vertical-offset="661">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1741,7 +1642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.099585064" vertical-offset="0" max-vertical-offset="482">
           <caret line="5" column="24" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1822,64 +1722,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
+    <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3708" max-vertical-offset="7644">
-          <caret line="348" column="53" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#isComplete#0;class#Market#0;class#Br#0" expanded="true" />
-            <element signature="method#report#0;class#BrokerOrder#0;class#Br#0" expanded="true" />
-            <element signature="method#report#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-            <element signature="method#getAllOrders#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-            <element signature="method#getAllOrdersExcept#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-            <element signature="method#findBrokerOrderByOrderId#0;class#OrderSuite#0;class#Br#0" expanded="true" />
-            <element signature="method#OrdStatus#0;class#OrdStatus#0;class#Br#0" expanded="true" />
-            <element signature="method#initFlow#0;class#Br#0" expanded="true" />
-            <element signature="method#execute#0;class#9372:9475" expanded="true" />
-            <element signature="method#call#0;class#9599:10103" expanded="true" />
-            <element signature="method#call#0;class#10139:10674" expanded="true" />
-            <element signature="method#call#0;class#10722:12175" expanded="true" />
-            <element signature="method#call#0;class#13995:17142" expanded="true" />
-            <element signature="method#call#0;class#17429:18245" expanded="true" />
-            <element signature="method#call#0;class#18297:18553" expanded="true" />
-            <element signature="method#call#0;class#18596:18830" expanded="true" />
-            <element signature="method#call#0;class#18881:19109" expanded="true" />
-            <element signature="method#call#0;class#19151:19384" expanded="true" />
-            <element signature="method#call#0;class#19427:19661" expanded="true" />
-            <element signature="method#call#0;class#19918:20149" expanded="true" />
-            <element signature="method#logOutState#0;class#Br#0" expanded="true" />
-            <element signature="method#logOutState#1;class#Br#0" expanded="true" />
-            <element signature="method#logErrState#0;class#Br#0" expanded="true" />
-            <element signature="method#logErrState#1;class#Br#0" expanded="true" />
-            <element signature="method#BrException#0;class#BrException#0;class#Br#0" expanded="true" />
-            <element signature="method#Br#0;class#Br#0" expanded="true" />
-            <element signature="method#validate#0;class#Br#0" expanded="true" />
-            <element signature="method#ocaGroup#0;class#Br#0" expanded="true" />
-            <element signature="method#accountSummary#0;class#Br#0" expanded="true" />
-            <element signature="method#error#2;class#Br#0" expanded="true" />
-            <element signature="method#nextValidId#0;class#Br#0" expanded="true" />
-            <element signature="method#orderStatus#0;class#Br#0" expanded="true" />
-            <element signature="method#tickPrice#0;class#Br#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="996">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/BrFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1104">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="226" max-vertical-offset="1104">
+          <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../apps/bracket/src/com/sigseg/ib/bracket/Bracket.java">
+    <entry file="file://$PROJECT_DIR$/../apps/br/src/com/sigseg/ib/br/Br.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17088607" vertical-offset="0" max-vertical-offset="996">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.25341615" vertical-offset="0" max-vertical-offset="3948">
+          <caret line="30" column="52" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="52" />
           <folding>
-            <element signature="method#run#0;class#Bracket#0" expanded="true" />
-            <element signature="method#accountSummary#0;class#Bracket#0" expanded="true" />
+            <element signature="method#bindFlow#0;class#Br#0" expanded="true" />
+            <element signature="method#call#0;class#14074:17552" expanded="true" />
           </folding>
         </state>
       </provider>
