@@ -28,7 +28,7 @@ public class Br extends StatefulContext implements EWrapper,Constants {
 
     public class Input {
         private final static int NUM_SHARES = 1;
-        private final static String SYMBOL="ES::ESZ4"; //
+        private final static String SYMBOL="ES::ESH5"; //http://www.barchart.net/commodityfutures/E-Mini_S%26P_500_Futures/ES?search=ES*
         private final static int TWS_PORT = 7496;
         private final static boolean IS_MARKET = false;
         private final static double DEFAULT_DISTANCE = 0.25;
@@ -393,7 +393,7 @@ public class Br extends StatefulContext implements EWrapper,Constants {
                     o.order.m_goodTillDate = "";
                     o.order.m_account = input.account;
 
-                    o.order.m_transmit = input.doTransmit;
+                    o.order.m_transmit = false;
                 }
                 for (BrokerOrder o : os.getAllOrdersExcept(os.in)){
                     o.order.m_ocaGroup = oca;
@@ -424,6 +424,12 @@ public class Br extends StatefulContext implements EWrapper,Constants {
                 // state, we'll lose them
                 onOrdersIssued.trigger(context);
 
+                // Set Transmit to False for all orders except the last one.
+                // Send the Parent order first, then the children. On the last child order
+                // set Transmit to True and the whole lot will be submitted.
+                os.stop.order.m_transmit = input.doTransmit;
+
+                // Transmit orders
                 ibServer.placeOrder( os.in.order.m_orderId, os.contract, os.in.order );
                 ibServer.placeOrder( os.out.order.m_orderId, os.contract, os.out.order );
                 ibServer.placeOrder( os.stop.order.m_orderId, os.contract, os.stop.order );
