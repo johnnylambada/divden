@@ -88,7 +88,7 @@ echo 'br@bracket -- you must transmit' >> $T/.hmm
 function brt
 {
   (
-  java -jar $(gettop)/tools/out/artifacts/br_jar/br.jar -t$*
+  java -jar $(gettop)/tools/out/artifacts/br_jar/br.jar -t $*
   )
 }
 echo 'brt@bracket -- transmitted' >> $T/.hmm
